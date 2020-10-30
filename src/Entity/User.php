@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="Cette adresse email est déjà utilisée.")
  */
 class User implements UserInterface
 {
@@ -20,6 +23,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     * message = "Votre adresse email n'est pas valide."
+     * )
      */
     private $email;
 
@@ -36,13 +42,34 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     * min = 2,
+     * max = 50,
+     * minMessage = "Minimum de {{ limit }} caractères.",
+     * maxMessage = "Maximum de {{ limit }} caractères.",
+     * allowEmptyString = false
+     * )
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     * min = 2,
+     * max = 50,
+     * minMessage = "Minimum de {{ limit }} caractères.",
+     * maxMessage = "Maximum de {{ limit }} caractères.",
+     * allowEmptyString = false
+     * )
      */
     private $lastname;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     * @Assert\Regex(pattern="/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/", 
+     * message="Format non valide.")
+     */
+    private $phone;
 
     public function getId(): ?int
     {
@@ -146,4 +173,15 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
 }
