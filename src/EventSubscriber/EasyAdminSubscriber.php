@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Entity\Product;
+use App\Entity\Produit;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
@@ -20,45 +21,99 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            BeforeEntityPersistedEvent::class => ['setCover'],
-            BeforeEntityUpdatedEvent::class => ['updateCover']
+            BeforeEntityPersistedEvent::class => ['setProduit'],
+            BeforeEntityUpdatedEvent::class => ['updateProduit']
         ];
     }
 
-    public function uploadCover($event)
+    public function uploadProduit($event)
     {
         $entity = $event->getEntityInstance();
-        $tmp_name = $_FILES['Product']['tmp_name']['cover'];
-        $filename = uniqid();
-        $extension = pathinfo($_FILES['Product']['name']['cover'], PATHINFO_EXTENSION);
+
+        $tmp_name_couverture = $_FILES['Produit']['tmp_name']['couverture'];
+        $tmp_name_image1 = $_FILES['Produit']['tmp_name']['image_1'];
+        $tmp_name_image2 = $_FILES['Produit']['tmp_name']['image_2'];
+        $tmp_name_image3 = $_FILES['Produit']['tmp_name']['image_3'];
+
+        $filename_couverture = uniqid();
+        $filename_image1 = uniqid();
+        $filename_image2 = uniqid();
+        $filename_image3 = uniqid();
+
+        $extension_couverture = pathinfo($_FILES['Produit']['name']['couverture'], PATHINFO_EXTENSION);
+        $extension_image1 = pathinfo($_FILES['Produit']['name']['image_1'], PATHINFO_EXTENSION);
+        $extension_image2 = pathinfo($_FILES['Produit']['name']['image_2'], PATHINFO_EXTENSION);
+        $extension_image3 = pathinfo($_FILES['Produit']['name']['image_3'], PATHINFO_EXTENSION);
         
         $project_dir = $this->appKernel->getProjectDir();
 
-        move_uploaded_file($tmp_name, $project_dir.'/public/uploads/'.$filename.'.'.$extension);
+        move_uploaded_file($tmp_name_couverture, $project_dir.'/public/uploads/'.$filename_couverture.'.'.$extension_couverture);
+        move_uploaded_file($tmp_name_image1, $project_dir.'/public/uploads/'.$filename_image1.'.'.$extension_image1);
+        move_uploaded_file($tmp_name_image2, $project_dir.'/public/uploads/'.$filename_image2.'.'.$extension_image2);
+        move_uploaded_file($tmp_name_image3, $project_dir.'/public/uploads/'.$filename_image3.'.'.$extension_image3);
 
-        $entity->setCover($filename.'.'.$extension);
+        $entity->setCouverture($filename_couverture.'.'.$extension_couverture);
+        $entity->setImage1($filename_image1.'.'.$extension_image1);
+        $entity->setImage2($filename_image2.'.'.$extension_image2);
+        $entity->setImage3($filename_image3.'.'.$extension_image3);
     }
 
-    public function updateCover(BeforeEntityUpdatedEvent $event)
+    public function updateProduit(BeforeEntityUpdatedEvent $event)
     {
-        if(!($event->getEntityInstance() instanceof Product))
+        if(!($event->getEntityInstance() instanceof Produit))
         {
             return;
         }
 
-        if($_FILES['Product']['tmp_name']['cover'] != "") {
-            $this->uploadCover($event);
+        if($_FILES['Produit']['tmp_name']['couverture'] != "") {
+            $entity = $event->getEntityInstance();
+            $tmp_name_couverture = $_FILES['Produit']['tmp_name']['couverture'];
+            $filename_couverture = uniqid();
+            $extension_couverture = pathinfo($_FILES['Produit']['name']['couverture'], PATHINFO_EXTENSION);
+            $project_dir = $this->appKernel->getProjectDir();
+             move_uploaded_file($tmp_name_couverture, $project_dir.'/public/uploads/'.$filename_couverture.'.'.$extension_couverture);
+            $entity->setCouverture($filename_couverture.'.'.$extension_couverture);
+        }
+
+        if($_FILES['Produit']['tmp_name']['image_1'] != "") {
+            $entity = $event->getEntityInstance();
+            $tmp_name_image1 = $_FILES['Produit']['tmp_name']['image_1'];
+            $filename_image1 = uniqid();
+            $extension_image1 = pathinfo($_FILES['Produit']['name']['image_1'], PATHINFO_EXTENSION);
+            $project_dir = $this->appKernel->getProjectDir();
+            move_uploaded_file($tmp_name_image1, $project_dir.'/public/uploads/'.$filename_image1.'.'.$extension_image1);
+            $entity->setImage1($filename_image1.'.'.$extension_image1);
+        }
+
+        if($_FILES['Produit']['tmp_name']['image_2'] != "") {
+            $entity = $event->getEntityInstance();
+            $tmp_name_image2 = $_FILES['Produit']['tmp_name']['image_2'];
+            $filename_image2 = uniqid();
+            $extension_image2 = pathinfo($_FILES['Produit']['name']['image_2'], PATHINFO_EXTENSION);
+            $project_dir = $this->appKernel->getProjectDir();
+            move_uploaded_file($tmp_name_image2, $project_dir.'/public/uploads/'.$filename_image2.'.'.$extension_image2);
+            $entity->setImage2($filename_image2.'.'.$extension_image2);
+        }
+
+        if($_FILES['Produit']['tmp_name']['image_3'] != "") {
+            $entity = $event->getEntityInstance();
+            $tmp_name_image3 = $_FILES['Produit']['tmp_name']['image_3'];
+            $filename_image3 = uniqid();
+            $extension_image3 = pathinfo($_FILES['Produit']['name']['image_3'], PATHINFO_EXTENSION);
+            $project_dir = $this->appKernel->getProjectDir();
+            move_uploaded_file($tmp_name_image3, $project_dir.'/public/uploads/'.$filename_image3.'.'.$extension_image3);
+            $entity->setImage3($filename_image3.'.'.$extension_image3);
         }
     }
 
-
-    public function setCover(BeforeEntityPersistedEvent $event)
+    public function setProduit(BeforeEntityPersistedEvent $event)
     {
-        if(!($event->getEntityInstance() instanceof Product))
+        if(!($event->getEntityInstance() instanceof Produit))
         {
             return;
         }
         
-        $this->uploadCover($event);
+        $this->uploadProduit($event);
     }
+
 }

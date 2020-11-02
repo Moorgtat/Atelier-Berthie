@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos produits{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1> Nos produits </h1>
+    <div class="row">
+    {% for produit in produits %}
+    <div class="col-md-4">
+        <div class="produit-item text-center">
+            <img src="/uploads/{{ produit.couverture}}" class="img-fluid" alt="">
+            <h5>{{ produit.titre }}</h5>
+            <span>{{ produit.soustitre }}</span>
+            <small>{{produit.prix }}</small>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
