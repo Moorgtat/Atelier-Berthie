@@ -3,19 +3,27 @@
 {% block title %}Nos produits{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <h1> Nos produits </h1>
+<div class="container mt-5 mb-5">
     <div class="row">
-    {% for produit in produits %}
-    <div class="col-md-4">
-        <div class="produit-item text-center">
-            <img src="/uploads/{{ produit.couverture}}" class="img-fluid" alt="">
-            <h5>{{ produit.titre }}</h5>
-            <span>{{ produit.soustitre }}</span>
-            <small>{{produit.prix }}</small>
+        <div class="col-md-3">
+        <h2>Filtrer</h2>
+        {{ form(form) }}
         </div>
-    </div>
-    {% endfor %}
+        <div class="col-md-9">
+            <h1> Nos produits </h1>
+            <div class="row mt-5">
+                {% for produit in produits %}
+                    <div class="col-md-4">
+                        <div class="produit-item text-center">
+                            <a href="{{ path('produit', {'slug': produit.slug}) }}"><img src="/uploads/{{ produit.couverture}}" class="img-fluid" alt=""></a>
+                            <h5><a href="{{ path('produit', {'slug': produit.slug}) }}">{{ produit.titre }}</a></h5>
+                            <span class="produit-soustitre">{{ produit.soustitre }}</span>
+                            <small class="produit-prix">{{ (produit.prix / 100) | number_format(2) }} &euro;</small>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

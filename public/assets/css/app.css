@@ -1,3 +1,7 @@
+body {
+    position: relative;
+    min-height: 100vh;
+}
 .navbar-item-custom, .navbar-item-custom a {
     color: white;
     text-decoration: none;
@@ -5,7 +9,8 @@
 .footer-custom {
     text-align: center;
     color: white;
-    position: fixed;
+    position: absolute;
+    margin-top: 150px;
     bottom: 0;
     width: 100%;
     padding-top: 15px;
@@ -18,6 +23,17 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+.produit-item {
+    margin-top: 40px;
+}
+.produit-item .produit-soustitre{
+    display: block;
+    margin-bottom: 10px;
+}
+.produit-item .produit-prix{
+    font-size: 14px;
+    font-weight: bold;
 }
 
 @media (min-width: 768px) {
