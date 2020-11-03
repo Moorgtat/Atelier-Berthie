@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+<h1>Mon panier</h1>
+    {% if cart | length > 0 %}
+    <table class="table mt-3">
+    <thead>
+        <tr>
+        <th scope="col">Produit</th>
+        <th scope="col">Description</th>
+        <th scope="col">Quantité</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Total</th>
+        <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% set total = null %}
+    {% for produit in cart %}
+        <tr>
+            <th>
+                <img height="75px" src="/uploads/{{ produit.produit.couverture}}" alt="{{ produit.produit.titre }}">
+            </th>
+            <td>
+                {{ produit.produit.titre }}<br>
+                <small>{{ produit.produit.soustitre }}</small>
+            </td>
+            <td>x {{ produit.quantity }}</td>
+            <td>{{ (produit.produit.prix / 100) | number_format(2) }} &euro;</td>
+            <td>{{ ((produit.produit.prix * produit.quantity) / 100) | number_format(2) }} &euro;</td>
+            <td><a href="{{ path('delete_to_cart', {'id' : produit.produit.id}) }}"><i class="far fa-trash-alt"></i></a></td>
+        </tr>
+        {% set total = total + (produit.produit.prix * produit.quantity) %}
+    {% endfor %}  
+    </tbody>
+    </table>
+<hr>
+<div class="text-center">
+<b>Nombre de produit:</b> {{ cart | length }} <br>
+<b>Total de mon panier:</b> {{ (total / 100) | number_format(2) }} &euro;
+</div>
+<hr>
+<div class="text-right">
+<a href="" class="btn btn-success">Valider mon panier</a>
+</div>
+{% else %}
+<hr>
+<h4> Votre panier est vide. </h4>
+{% endif %}
+</div> 
+{% endblock %}

@@ -14,7 +14,7 @@
                 <small>{{ (produit.prix / 100) | number_format(2) }} &euro;</small>
                 <hr>
                 <p>{{ produit.description }}<p> 
-                <a href="" class="btn btn-primary">Ajouter au panier</a>            
+                <a href="{{ path('add_to_cart', {'id': produit.id}) }}" class="btn btn-primary">Ajouter au panier</a>            
         </div>
     </div>
 </div>      

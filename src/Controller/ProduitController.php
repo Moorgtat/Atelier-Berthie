@@ -17,7 +17,6 @@ class ProduitController extends AbstractController
      */
     public function index(ProduitRepository $repo, Request $request): Response
     {
-        $produits = $repo->findAll();
         $search = new Search();
 
         $form = $this->createForm(SearchType::class, $search);
@@ -25,6 +24,8 @@ class ProduitController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $produits = $repo->findWithSearch($search);
+        } else {
+            $produits = $repo->findAll();
         }
 
         return $this->render('produit/index.html.twig', [
