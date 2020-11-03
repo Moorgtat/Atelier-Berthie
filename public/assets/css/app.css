@@ -36,6 +36,11 @@ body {
     font-weight: bold;
 }
 
+.custom-minus-plus a, .custom-minus-plus a:hover{
+    text-decoration: none;
+    color: grey;
+}
+
 @media (min-width: 768px) {
     .bd-placeholder-img-lg {
         font-size: 3.5rem;
