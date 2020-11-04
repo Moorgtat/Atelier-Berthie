@@ -9,11 +9,33 @@
 {% if app.user.adresses | length == 0 %}
     <p>Vous n'avez pas encore ajouté d'adresse.</p>
 {% else %}
-    Mes Adresses.
+<div class="row">
+{% for adresse in app.user.adresses %}
+<div class="col-md-4">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ adresse.prenom }} {{ adresse.nom }}</h5>
+            <p class="card-text">{{ adresse.societe }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ adresse.titre }}</li>
+            <li class="list-group-item">{{ adresse.numero }} {{ adresse.rue }} {{ adresse.codepostal }} {{ adresse.ville }} {{ adresse.pays }}</li>
+            <li class="list-group-item">{{ adresse.telephone }}</li>
+        </ul>
+        <div class="card-body">
+            <a href="{{ path('adresse_edit', {'id': adresse.id}) }}" class="btn btn-info">Modifier</a>
+            <a href="{{ path('adresse_delete', {'id': adresse.id}) }}" class="btn btn-info">Supprimer</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
 {% endif %}
 <br>
 <hr>
-<a href="{{ path('adresse_add') }}" class="btn btn-primary">Ajouter une adresse</a>
-<a href="{{ path('account') }}"class="btn btn-primary">Retour</a>
+<a href="{{ path('adresse_add') }}">Ajouter une adresse</a>
+<br>
+<a href="{{ path('account') }}">Retour</a>
+<hr>
 </div>
 {% endblock %}

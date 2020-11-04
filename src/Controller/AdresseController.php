@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Adresse;
 use App\Form\AdresseType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\AdresseRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdresseController extends AbstractController
 {
@@ -21,14 +24,64 @@ class AdresseController extends AbstractController
     /**
      * @Route("/compte/ajouter-une-adresse", name="adresse_add")
      */
-    public function add(): Response
+    public function add(Request $request, EntityManagerInterface $manager): Response
     {
         $adresse = new Adresse();
         $form = $this->createForm(AdresseType::class, $adresse);
 
-        return $this->render('adresse/adresse_add.html.twig', [
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $adresse->setUser($this->getUser());
+            $manager->persist($adresse);
+            $manager->flush();
+
+            return $this->redirectToRoute('adresse');
+        }
+
+        return $this->render('adresse/adresse_form.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
+    /**
+     * @Route("/compte/modifer-une-adresse/{id}", name="adresse_edit")
+     */
+    public function edit($id, AdresseRepository $repo, Request $request, EntityManagerInterface $manager): Response
+    {
+        $adresse = $repo->findOneById($id);
+
+        if(!$adresse || $adresse->getUser() != $this->getUser()) {
+            return $this->redirectToRoute('adresse');
+        }
+
+        $form = $this->createForm(AdresseType::class, $adresse);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->flush();
+
+            return $this->redirectToRoute('adresse');
+        }
+
+        return $this->render('adresse/adresse_form.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/compte/supprimer-une-adresse/{id}", name="adresse_delete")
+     */
+    public function delete($id, AdresseRepository $repo, EntityManagerInterface $manager): Response
+    {
+        $adresse = $repo->findOneById($id);
+
+        if($adresse || $adresse->getUser() == $this->getUser()) {
+            $manager->remove($adresse);
+            $manager->flush();
+        }
+
+        return $this->redirectToRoute('adresse');
+    }
 }

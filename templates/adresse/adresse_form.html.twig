@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion adresse{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+<h1>Gérer mes adresses</h1>
+<hr>
+<a href="{{ path('adresse') }}">Retour</a>
+<hr>
+{{ form(form) }}
+<hr>
+</div>
+{% endblock %}
