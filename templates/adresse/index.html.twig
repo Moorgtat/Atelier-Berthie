@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes adresses{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+<h1>Mes adresses</h1>
+<hr>
+{% if app.user.adresses | length == 0 %}
+    <p>Vous n'avez pas encore ajouté d'adresse.</p>
+{% else %}
+    Mes Adresses.
+{% endif %}
+<br>
+<hr>
+<a href="{{ path('adresse_add') }}" class="btn btn-primary">Ajouter une adresse</a>
+<a href="{{ path('account') }}"class="btn btn-primary">Retour</a>
+</div>
+{% endblock %}
