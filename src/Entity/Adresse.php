@@ -73,6 +73,11 @@ class Adresse
      */
     private $telephone;
 
+    public function __toString() 
+    {
+        return $this->getTitre().'[br]'.$this->getNumero().' '.$this->getRue().'[br]'.$this->getCodepostal().' '.$this->getVille();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

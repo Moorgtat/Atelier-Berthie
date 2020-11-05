@@ -4,18 +4,36 @@
 
 {% block body %}
 <div class="container mt-5">
-    <h1> Je passe ma commande</h1>
+    <h1> Ou et comment me livrer?</h1>
     <p>Choissisez vos préférences avant de régler votre commande.</p>
     <hr>
     <div class="row">
-        <div class="col-md-6">
-            <b>Choisir mon adresse de livraison</b><br>
-            <b>Choisir mon transporteur</b>
+        <div class="col">
+            {% set formHtml %}
+            {{ form_start(form, {action:path('commande_validation')}) }}
+            {{ form_end(form) }}
+            {% endset %}
+
+            {{ formHtml | replace({'[br]' : '<br>'}) | raw }}
+
         </div>
-        <div class="col-md-6">
-            <b>Recap de ma commande</b><br>
-            <b>Bouton valider</b>
-        </div>
+        {# <div class="col-md-6">
+            <b>Recapitulatif de ma commande:</b>
+            {% for produit in cart %}
+            <div class="row">
+                <div class="col-2">
+                    <img height="75px" src="/uploads/{{ produit.produit.couverture}}" alt="{{ produit.produit.titre }}">
+                </div>
+                <div class="col-8 my-auto">
+                    {{ produit.produit.titre }}<br>
+                    <small>{{ produit.produit.soustitre }}</small>
+                </div>
+                <div class="col-2 my-auto">
+                    x {{ produit.quantity}}
+                </div>
+            </div>   
+            {% endfor %}
+        </div>      #}
     </div>
 </div>
 {% endblock %}

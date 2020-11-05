@@ -50,6 +50,11 @@ class Commande
      */
     private $commandeDetails;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPaid;
+
     public function __construct()
     {
         $this->commandeDetails = new ArrayCollection();
@@ -146,6 +151,18 @@ class Commande
                 $commandeDetail->setMaCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsPaid(): ?bool
+    {
+        return $this->isPaid;
+    }
+
+    public function setIsPaid(bool $isPaid): self
+    {
+        $this->isPaid = $isPaid;
 
         return $this;
     }
