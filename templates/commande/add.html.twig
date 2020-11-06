@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider ma commande{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Valider ma commande</h1>
+    <p>Récapitulatif de votre commande.</p>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">
+            <strong>Mon adresse de livraison:</strong><br>
+            {{ livraison_content | raw }}
+            <hr>
+            <strong>Mon transporteur:</strong><br>
+            {{ transporteur.titre }}<br>
+            {{ transporteur.description }}<br>
+            {{ transporteur.prix | number_format(2) }} €
+        </div>
+        <div class="col-md-8">
+            <b>Recapitulatif de ma commande:</b>
+            {% set total = null %}
+            {% for produit in cart %}
+                <div class="row">
+                    <div class="col-2">
+                        <img height="75px" src="/uploads/{{ produit.produit.couverture}}" alt="{{ produit.produit.titre }}">
+                    </div>
+                    <div class="col-8 my-auto">
+                        {{ produit.produit.titre }}<br>
+                        <small>{{ produit.produit.soustitre }}
+                        <br>
+                        x {{ produit.quantity}}</small>
+                    </div>
+                    <div class="col-2 my-auto">
+                        {{ ((produit.produit.prix * produit.quantity) / 100) | number_format(2) }} &euro;
+                    </div>
+                </div>
+            {% set total = total + (produit.produit.prix * produit.quantity) %}
+            {% endfor %}
+            <hr>
+            <div class="text-right">
+                <strong>Total du panier: </strong>{{ (total / 100) | number_format(2) }} &euro;
+                <br>
+                <strong>Livraison: </strong>{{ (transporteur.prix) | number_format(2) }} &euro;<br>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="text-right">
+    <strong>Total de ma commande: </strong> {{ ((total / 100) + transporteur.prix) | number_format(2) }} &euro; <br>
+    </div>
+    <hr>
+    <a href="" class="btn btn-lg btn-block btn-info">Valider ma commande</a>
+</div>
+{% endblock %}
