@@ -78,7 +78,7 @@ class CommandeController extends AbstractController
                 $manager->persist($commandeDetail);
             }
 
-            // $manager->flush();
+            $manager->flush();
 
             return $this->render('commande/add.html.twig', [
                 'cart' => $cart->getFull(),

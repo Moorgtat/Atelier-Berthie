@@ -89,6 +89,11 @@ class User implements UserInterface
         $this->commandes = new ArrayCollection();
     }
 
+    public function getFullName(): string 
+    {
+        return $this->getFirstname().' '.$this->getLastname();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

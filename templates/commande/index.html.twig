@@ -11,6 +11,10 @@
         <div class="col">
             {% set formHtml %}
             {{ form_start(form, {action:path('commande_validation')}) }}
+            {{ form_label(form.adresses, 'Choisissez votre adresse de livraison:')}}
+            <div class="mb-3" >
+            <a href="{{ path('adresse_add')}}">Ajouter une nouvelle adresse.</a>
+            <div>
             {{ form_end(form) }}
             {% endset %}
 

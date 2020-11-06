@@ -18,7 +18,7 @@ class CommandeType extends AbstractType
 
         $builder
             ->add('adresses', EntityType::class, [
-                'label' => 'Choisissez votre adresse de livraison',
+                'label' => false,
                 'required' => true,
                 'class' => Adresse::class,
                 'choices' => $user->getAdresses(),
@@ -26,7 +26,7 @@ class CommandeType extends AbstractType
                 'expanded' => true
             ])
             ->add('transporteurs', EntityType::class, [
-                'label' => 'Choisissez votre transporteur' ,
+                'label' => 'Choisissez votre transporteur:' ,
                 'required' => true,
                 'class' => Transporteur::class,
                 'multiple' => false,
