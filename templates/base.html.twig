@@ -9,7 +9,10 @@
     <title>Atelier Berthie - {% block title %}{% endblock %}</title>
     
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico"/>
-    
+   
+    {% block javascript %}
+    {% endblock %}
+   
     {% block stylesheet %}
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -64,6 +67,9 @@
     <!-- Bootstrap-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
-
 </body>
+
+{% block script %}
+{% endblock %}
+
 </html>

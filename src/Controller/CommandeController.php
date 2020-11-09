@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Classe\Cart;
 use App\Entity\Commande;
-use App\Entity\CommandeDetail;
 use App\Form\CommandeType;
+use App\Entity\CommandeDetail;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,6 +58,8 @@ class CommandeController extends AbstractController
             $livraison_content .= '<br>'.$livraison->getPays();
 
             $commande = new Commande();
+            $reference = $date->format('dmY').'-'.uniqid();
+            $commande->setReference($reference);
             $commande->setUser($this->getUser());
             $commande->setCreatedAt($date);
             $commande->setTransporteurTitre($transporteur->getTitre());
@@ -83,7 +85,8 @@ class CommandeController extends AbstractController
             return $this->render('commande/add.html.twig', [
                 'cart' => $cart->getFull(),
                 'transporteur' => $transporteur,
-                'livraison_content' => $livraison_content
+                'livraison_content' => $livraison_content,
+                'reference' => $commande->getReference()
             ]);
         }
 
