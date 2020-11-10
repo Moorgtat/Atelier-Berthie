@@ -7,6 +7,7 @@ use App\Classe\Cart;
 use App\Entity\Commande;
 use App\Repository\CommandeRepository;
 use App\Repository\ProduitRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Checkout\Session;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +19,7 @@ class StripeController extends AbstractController
     /**
      * @Route("/commande/create-session/{reference}", name="stripe_create_session")
      */
-    public function index(CommandeRepository $commandeRepo, ProduitRepository $produitRepo, Cart $cart, $reference): Response
+    public function index(EntityManagerInterface $manager, CommandeRepository $commandeRepo, ProduitRepository $produitRepo, Cart $cart, $reference): Response
     {
         $YOUR_DOMAIN = 'http://127.0.0.1:8000/';
 
@@ -70,7 +71,8 @@ class StripeController extends AbstractController
         'cancel_url' => $YOUR_DOMAIN . 'commande/erreur/{CHECKOUT_SESSION_ID}',
         ]);
 
-        $commande->setStripSessionId($checkout_session->id);
+        $commande->setStripeSessionId($checkout_session->id);
+        $manager->flush();
 
         $response = new JsonResponse(['id' => $checkout_session->id]);
 
