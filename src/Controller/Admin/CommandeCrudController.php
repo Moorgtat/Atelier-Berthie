@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 
 class CommandeCrudController extends AbstractCrudController
 {
@@ -35,7 +36,10 @@ class CommandeCrudController extends AbstractCrudController
             TextField::new('stringCreatedAt', 'Passée le'),
             TextField::new('user.getFullName', 'Utilisateur'),
             MoneyField::new('total', 'Total')->setCurrency('EUR'),
-            BooleanField::new('isPaid', 'Payée')
+            TextField::new('transporteurTitre', 'Transporteur'),
+            MoneyField::new('transporteurPrix', 'Frais de port')->setCurrency('EUR'),
+            BooleanField::new('isPaid', 'Payée'),
+            ArrayField::new('commandeDetails', 'Produits achetés')->hideOnIndex()
         ];
     }
 
@@ -43,6 +47,7 @@ class CommandeCrudController extends AbstractCrudController
     {
         return $crud
             // the labels used to refer to this entity in titles, buttons, etc.
+            ->setDefaultSort([ 'id' => 'DESC'])
             ->setEntityLabelInSingular('Commande')
             ->setEntityLabelInPlural('Commandes');
     }

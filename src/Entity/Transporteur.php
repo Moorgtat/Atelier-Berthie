@@ -33,7 +33,7 @@ class Transporteur
     private $prix;
 
     public function __toString() {
-        return $this->getTitre().'[br]'.$this->getDescription().'[br]'.number_format($this->getPrix(), 2).'€';
+        return $this->getTitre().'[br]'.$this->getDescription().'[br]'.number_format(($this->getPrix() / 100), 2).'€';
     }
 
     public function getId(): ?int

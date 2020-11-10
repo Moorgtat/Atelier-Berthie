@@ -43,6 +43,10 @@ class CommandeDetail
      */
     private $total;
 
+    public function __toString() {
+        return $this->getProduit().' x'.$this->getQuantite();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

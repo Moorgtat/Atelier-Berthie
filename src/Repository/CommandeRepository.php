@@ -19,6 +19,21 @@ class CommandeRepository extends ServiceEntityRepository
         parent::__construct($registry, Commande::class);
     }
 
+    /*
+    * @return Commande[] Returns an array of Commande objects
+    * Permets d'afficer les commandes payés par ordre DESC
+    */
+    public function findSuccesCommandes($user)
+    {
+        return $this->createQueryBuilder('c')
+        ->andWhere('c.isPaid = 1')
+        ->andwhere('c.user = :user')
+        ->setParameter('user', $user)
+        ->orderBy('c.id', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
+
     // /**
     //  * @return Commande[] Returns an array of Commande objects
     //  */

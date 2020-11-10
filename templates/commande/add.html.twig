@@ -19,7 +19,7 @@
             <strong>Mon transporteur:</strong><br>
             {{ transporteur.titre }}<br>
             {{ transporteur.description }}<br>
-            {{ transporteur.prix | number_format(2) }} €
+            {{ (transporteur.prix / 100 )| number_format(2) }} €
         </div>
         <div class="col-md-8">
             <b>Recapitulatif de ma commande:</b>
@@ -45,27 +45,27 @@
     </div>
     <hr>
     <div class="row">
-    <div class="col-8">
-    </div>
-    <div class="col-4">
-    <table>
-        <tr>
-            <td><strong>Total du panier: </strong></td>
-            <td> &nbsp; </td>
-            <td>{{ (total / 100) | number_format(2) }} &euro;</td>
-        </tr>
-        <tr>
-            <td><strong>Livraison: </strong></td>
-            <td> &nbsp; </td>
-            <td>{{ (transporteur.prix) | number_format(2) }} &euro;</td>
-        </tr>
-        <tr>
-            <td><strong>Total de ma commande: </strong></td>
-            <td> &nbsp; </td>
-            <td>{{ ((total / 100) + transporteur.prix) | number_format(2) }} &euro;</td>
-        </tr>
-    </table>
-    </div>
+        <div class="col-8">
+        </div>
+        <div class="col-4">
+            <table>
+                <tr>
+                    <td><strong>Total du panier: </strong></td>
+                    <td> &nbsp; </td>
+                    <td>{{ (total / 100) | number_format(2) }} &euro;</td>
+                </tr>
+                <tr>
+                    <td><strong>Livraison: </strong></td>
+                    <td> &nbsp; </td>
+                    <td>{{ (transporteur.prix / 100) | number_format(2) }} &euro;</td>
+                </tr>
+                <tr>
+                    <td><strong>Total de ma commande: </strong></td>
+                    <td> &nbsp; </td>
+                    <td>{{ ((total / 100) + (transporteur.prix / 100)) | number_format(2) }} &euro;</td>
+                </tr>
+            </table>
+        </div>
     </div>
     
     <hr>

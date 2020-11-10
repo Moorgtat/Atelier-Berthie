@@ -7,8 +7,9 @@
 <h1>Mon compte</h1>
 <p>Bienvenue {{ app.user.firstname }} sur votre compte. Cet espace vous permets de gérer vos informations personelles.</p>
 <hr>
-<a href="{{ path('account_password') }}">Modifier mon mot de passe.</a><br>
+<a href="{{ path('account_commande') }}">Mes Commandes</a><br>
 <a href="{{ path('adresse') }}">Gérer mes adresses.</a><br>
+<a href="{{ path('account_password') }}">Modifier mon mot de passe.</a><br>
 <hr>
 </div>
 {% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+<h1>Mes Commandes</h1>
+<p> Vous allez pouvoir gérer toutes vos commandes dans cet espace.</p>
+<a href="{{ path('account') }}">Retour</a>
+<hr>
+{% if commandes | length == 0 %}
+    <p>Vous n'avez pas encore effectué de commande.</p>
+{% else %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Passée le</th>
+      <th scope="col">Référence</th>
+      <th scope="col">Produits</th>
+      <th scope="col">Total</th>
+      <th scope="col"></th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for commande in commandes %}
+      <tr>
+      <td>{{ commande.createdAt | date('d/m/Y' )}}</td>
+      <td>{{ commande.reference }}</td>
+      <td>{{ commande.commandeDetails | length }}</td>
+      <td>{{ ((commande.transporteurPrix + commande.getTotal) / 100) | number_format(2) }} €</td>
+      <td class="text-right"><a href="{{ path('account_commande_show', {'reference' : commande.reference}) }}">Voir ma commande</a></td>
+     </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+</div>
+{% endblock %}

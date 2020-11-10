@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma commande - {{ commande.reference }}{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2>Ma Commande (<small>{{ commande.reference }}</small>)</h2>
+    <p> Gérer votre commande.</p>
+    <a href="{{ path('account_commande') }}">Retour</a>
+    <hr>
+    <strong>Commande passée le :</strong> <small>{{ commande.createdAt | date('d/m/Y') }}</small> <br>
+    <strong>Reference :</strong> <small>{{ commande.reference }}</small> <br>
+    <strong>Transporteur choisi :</strong> {{ commande.transporteurTitre }}
+    <hr>
+<div class="row">
+        <div class="col-md-4">
+            <strong>Mon adresse de livraison:</strong><br>
+            {{ commande.livraison | raw }}
+        </div>
+        <div class="col-md-8">
+            <b>Recapitulatif de ma commande:</b>
+            {% set total = null %}
+            {% for produit in commande.commandeDetails %}
+                <div class="row">
+                    <div class="col-8 my-auto">
+                        {{ produit.produit }}
+                        <small>x {{ produit.quantite}}</small>
+                    </div>
+                    <div class="col-2 my-auto">
+                        {{ ((produit.prix * produit.quantite) / 100) | number_format(2) }} &euro;
+                    </div>
+                </div>
+            {% set total = total + (produit.prix * produit.quantite) %}
+            {% endfor %}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-8">
+        </div>
+        <div class="col-4">
+            <table>
+                <tr>
+                    <td><strong>Total du panier: </strong></td>
+                    <td> &nbsp; </td>
+                    <td>{{ (total / 100) | number_format(2) }} &euro;</td>
+                </tr>
+                <tr>
+                    <td><strong>Livraison: </strong></td>
+                    <td> &nbsp; </td>
+                    <td>{{ (commande.transporteurPrix / 100) | number_format(2) }} &euro;</td>
+                </tr>
+                <tr>
+                    <td><strong>Total de ma commande: </strong></td>
+                    <td> &nbsp; </td>
+                    <td>{{ ((total / 100) + (commande.transporteurPrix / 100)) | number_format(2) }} &euro;</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
