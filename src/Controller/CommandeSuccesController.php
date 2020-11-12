@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classe\Cart;
+use App\Classe\Mail;
 use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,6 +29,14 @@ class CommandeSuccesController extends AbstractController
             $manager->flush();
 
             //Mail  client confirm
+            $content = "Bonjour".$commande->getUser()->getFirstname()."<br>Merci pour votre commande!<br>L'Atelier Berthie";
+            $mail = new Mail();
+            $mail->send($this->getUser()->getEmail(), 
+            $commande->getUser()->getFirstname(), 
+            "Votre commande de l'Atelier Berthie est validée !", 
+            $content
+            );
+
         }
         
         return $this->render('commande/succes.html.twig', [

@@ -38,7 +38,7 @@ class AdresseController extends AbstractController
             $manager->flush();
 
             if($cart->get()) {
-                return $this->redirectToRoute('commande');
+                return $this->redirectToRoute('commande_livraison');
             } else {
                 return $this->redirectToRoute('adresse');
             }

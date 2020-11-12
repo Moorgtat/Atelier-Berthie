@@ -37,7 +37,7 @@ class RegisterController extends AbstractController
                 $manager->persist($user);
                 $manager->flush();
 
-                $content = "Votre inscription s'est effectué avec succès. Vous pouvez dés à présent vous connecter et commander sur le site !";
+                $content = "Bonjour".$user->getFirstname()."<br>Votre inscription s'est effectué avec succès. Vous pouvez dés à présent vous connecter et commander sur le site !";
                 $mail = new Mail();
                 $mail->send($user->getEmail(), 
                 $user->getFirstname(), 
