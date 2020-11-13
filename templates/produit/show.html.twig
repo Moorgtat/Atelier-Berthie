@@ -17,5 +17,19 @@
                 <a href="{{ path('add_to_cart', {'id': produit.id}) }}" class="btn btn-primary">Ajouter au panier</a>            
         </div>
     </div>
+    <hr>
+    <h3>Nos meilleurs Ventes!</h3>
+    <div class="row mb-5">
+           {% for produit in produits %}
+                    <div class="col-md-3">
+                        <div class="produit-item text-center">
+                            <a href="{{ path('produit', {'slug': produit.slug}) }}"><img src="/uploads/{{ produit.couverture}}" class="img-fluid" alt=""></a>
+                            <h5><a href="{{ path('produit', {'slug': produit.slug}) }}">{{ produit.titre }}</a></h5>
+                            <span class="produit-soustitre">{{ produit.soustitre }}</span>
+                            <small class="produit-prix">{{ (produit.prix / 100) | number_format(2) }} &euro;</small>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
 </div>      
 {% endblock %}

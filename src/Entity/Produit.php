@@ -69,6 +69,11 @@ class Produit
      */
     private $categorie;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isBest;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
@@ -207,6 +212,18 @@ class Produit
     public function removeCategorie(Categorie $categorie): self
     {
         $this->categorie->removeElement($categorie);
+
+        return $this;
+    }
+
+    public function getIsBest(): ?bool
+    {
+        return $this->isBest;
+    }
+
+    public function setIsBest(?bool $isBest): self
+    {
+        $this->isBest = $isBest;
 
         return $this;
     }

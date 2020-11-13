@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class ProduitCrudController extends AbstractCrudController
 {
@@ -25,10 +26,11 @@ class ProduitCrudController extends AbstractCrudController
             TextField::new('soustitre'),
             SlugField::new('slug')->setTargetFieldName('titre')->onlyWhenCreating(),
             ImageField::new('couverture')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false]),
-            ImageField::new('image_1')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false]),
-            ImageField::new('image_2')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false]),
-            ImageField::new('image_3')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false]),
+            ImageField::new('image_1')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false])->hideOnIndex(),
+            ImageField::new('image_2')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false])->hideOnIndex(),
+            ImageField::new('image_3')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false])->hideOnIndex(),
             TextareaField::new('description'),
+            BooleanField::new('isBest'),
             MoneyField::new('prix')->setCurrency('EUR'),
             AssociationField::new('categorie')
         ];
