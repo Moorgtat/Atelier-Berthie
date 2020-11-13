@@ -23,9 +23,9 @@ class CommandeSuccesController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        if(!$commande->getIsPaid()) {
+        if($commande->getState() == 0) {
             $cart->remove();
-            $commande->setIsPaid(1);
+            $commande->setState(1);
             $manager->flush();
 
             //Mail  client confirm
@@ -36,7 +36,6 @@ class CommandeSuccesController extends AbstractController
             "Votre commande de l'Atelier Berthie est validée !", 
             $content
             );
-
         }
         
         return $this->render('commande/succes.html.twig', [

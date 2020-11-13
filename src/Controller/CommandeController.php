@@ -65,7 +65,7 @@ class CommandeController extends AbstractController
             $commande->setTransporteurTitre($transporteur->getTitre());
             $commande->setTransporteurPrix($transporteur->getPrix());
             $commande->setLivraison($livraison_content);
-            $commande->setIsPaid(0);
+            $commande->setState(0);
 
             $manager->persist($commande);
 

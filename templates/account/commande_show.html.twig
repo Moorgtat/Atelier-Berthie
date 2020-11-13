@@ -5,8 +5,16 @@
 {% block body %}
 <div class="container mt-5">
     <h2>Ma Commande (<small>{{ commande.reference }}</small>)</h2>
-    <p> Gérer votre commande.</p>
-    <a href="{{ path('account_commande') }}">Retour</a>
+    <h4>Statut : <small>
+        {% if commande.state == 1 %}
+            En attente de préparation
+        {% elseif commande.state == 2 %}
+            En cours de préparation
+        {% elseif commande.state == 3 %}
+            En cours de livraison
+        {% endif %}
+        </small>
+    </h4>
     <hr>
     <strong>Commande passée le :</strong> <small>{{ commande.createdAt | date('d/m/Y') }}</small> <br>
     <strong>Reference :</strong> <small>{{ commande.reference }}</small> <br>
@@ -58,5 +66,7 @@
             </table>
         </div>
     </div>
+        <hr>
+        <a href="{{ path('account_commande') }}">Retour</a>
 </div>
 {% endblock %}
