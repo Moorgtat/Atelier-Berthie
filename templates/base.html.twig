@@ -5,71 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content=" Atelier Berthie - Votre boutique de bijous fait-main à Vannes.">
     <meta name="author" content="Olivia & Berthie">   
-
     <title>Atelier Berthie - {% block title %}{% endblock %}</title>
-    
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico"/>
-   
     {% block javascript %}
     {% endblock %}
-   
     {% block stylesheet %}
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/carousel.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
     {% endblock %}
-
 </head>
-
 <body>
-
-<!-- Navbar -->
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="{{ path('home') }}">Atelier Berthie</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('produits') }}">Nos produits<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Qui sommes nous?<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Contact<span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-            <div class="navbar-item-custom">
-                {% if app.user %}
-                    <a href="{{ path('account') }}">Mon compte</a> | <a href="{{ path('app_logout') }}">Déconnexion</a>
-                {% else %}
-                    <a href="{{ path('app_login') }}">Connexion</a>
-                {% endif %}
-                <a href="{{ path('cart') }}" class="mx-3"><i class="fas fa-shopping-cart"></i></a>
-            </div>
+{{ include('common/header.html.twig') }}
+{% for message in app.flashes('success') %}
+        <div class="alert alert-info text-center">
+            {{ message }}
         </div>
-    </nav>
-</header>
-
+{% endfor %}
+{% for message in app.flashes('error') %}
+        <div class="alert alert-info text-center">
+            {{ message }}
+        </div>
+{% endfor %}        
 {% block body %}
 {% endblock %}
-
-    <!-- FOOTER -->
-    <footer class="footer-custom">
-        <p>&copy; 2017-2020 Atelier Berthie - <small> <a href="#" style="color: grey;">Privacy</a> & <a href="#" style="color: grey;">Terms</a> </small></p>
-    </footer>
+{{ include('common/footer.html.twig') }}
     <!-- Font Awesome icons (free version)-->
 	<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Bootstrap-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
 </body>
-
 {% block script %}
 {% endblock %}
-
 </html>

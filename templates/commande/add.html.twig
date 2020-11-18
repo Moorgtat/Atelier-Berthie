@@ -52,7 +52,7 @@
                 <tr>
                     <td><strong>Total du panier: </strong></td>
                     <td> &nbsp; </td>
-                    <td>{{ (total / 100) | number_format(2) }} &euro;</td>
+                    <td>{{ (total / 100) | number_format(2) }} &euro; <small>(Dont TVA: {{ (total / 100) * (20/100) | number_format(2) }} &euro;)</small></td>
                 </tr>
                 <tr>
                     <td><strong>Livraison: </strong></td>
@@ -62,7 +62,7 @@
                 <tr>
                     <td><strong>Total de ma commande: </strong></td>
                     <td> &nbsp; </td>
-                    <td>{{ ((total / 100) + (transporteur.prix / 100)) | number_format(2) }} &euro;</td>
+                    <td>{{ ((total / 100) + (transporteur.prix / 100)) | number_format(2) }} &euro; TCC</td>
                 </tr>
             </table>
         </div>
@@ -74,6 +74,7 @@
 {% endblock %}
 
 {% block script %}
+
 <script type="text/javascript">
     var stripe = Stripe("pk_test_51HlWG3GucqTraIY3PlMgPWTFdeav6LcwWNWBPkq790lHtuZ98jjamG2gWCPAXUT1ismvcWhMaMK9Joq1ZF0yxP4s00Jsu4DndS");
     var checkoutButton = document.getElementById("checkout-button");

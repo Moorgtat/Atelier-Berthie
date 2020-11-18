@@ -5,11 +5,8 @@
 {% block body %}
 <div class="container mt-5">
 <h1> Inscription </h1>
-{% if notification %}
-    <div class="alert alert-info">
-        {{ notification }}
-    </div>
-{% endif %}
+<a href="{{ path('app_login')}}">Retour à l'écran de connexion<a>
+<hr>
 {{ form(form) }}
 </div>
 {% endblock %}
