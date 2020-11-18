@@ -18,7 +18,7 @@ class HomeController extends AbstractController
         $produits = $produitRepo->findByIsBest(true);
         $headers = $headerRepo->findAll();
         
-        return $this->render('home/index.html.twig', [
+        return $this->render('home/accueil.html.twig', [
             'produits' => $produits,
             'headers' => $headers
         ]);

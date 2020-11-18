@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Classe\Cart;
+use App\Service\Cart;
 use App\Entity\Adresse;
 use App\Form\AdresseType;
 use App\Repository\AdresseRepository;
@@ -17,9 +17,9 @@ class AdresseController extends AbstractController
     /**
      * @Route("/compte/adresse", name="adresse")
      */
-    public function index(): Response
+    public function all(): Response
     {
-        return $this->render('adresse/index.html.twig');
+        return $this->render('adresse/all_adresses.html.twig');
     }
 
     /**
@@ -44,7 +44,7 @@ class AdresseController extends AbstractController
             }
         }
 
-        return $this->render('adresse/adresse_form.html.twig', [
+        return $this->render('adresse/add_adresse.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -70,7 +70,7 @@ class AdresseController extends AbstractController
             return $this->redirectToRoute('adresse');
         }
 
-        return $this->render('adresse/adresse_form.html.twig', [
+        return $this->render('adresse/add_adresse.html.twig', [
             'form' => $form->createView()
         ]);
     }

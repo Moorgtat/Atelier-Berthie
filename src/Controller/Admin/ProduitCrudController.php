@@ -22,9 +22,9 @@ class ProduitCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('titre')->onlyWhenCreating(),
+            TextField::new('titre'),
+            // SlugField::new('slug')->setTargetFieldName('titre')->hideOnIndex(),
             TextField::new('soustitre'),
-            SlugField::new('slug')->setTargetFieldName('titre')->onlyWhenCreating(),
             ImageField::new('couverture')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false]),
             ImageField::new('image_1')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false])->hideOnIndex(),
             ImageField::new('image_2')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false])->hideOnIndex(),

@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Produit
 {
@@ -77,6 +79,19 @@ class Produit
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
+    }
+
+    /**
+     * Initialise le slug
+     * 
+     *@ORM\PrePersist
+     *@ORM\PreUpdate
+     *
+     * @return void
+     */
+    public function initializeSlug() {
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->titre);
     }
 
     public function getId(): ?int

@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Classe\Search;
+use App\Service\Search;
 use App\Form\SearchType;
 use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +15,7 @@ class ProduitController extends AbstractController
     /**
      * @Route("/nos-produits", name="produits")
      */
-    public function index(ProduitRepository $repo, Request $request): Response
+    public function allProduit(ProduitRepository $repo, Request $request): Response
     {
         $search = new Search();
 
@@ -28,7 +28,7 @@ class ProduitController extends AbstractController
             $produits = $repo->findAll();
         }
 
-        return $this->render('produit/index.html.twig', [
+        return $this->render('produit/all.html.twig', [
             'produits' => $produits,
             'form' => $form->createView()
         ]);

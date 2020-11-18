@@ -2,14 +2,20 @@
 
 namespace App\Controller;
 
-use App\Classe\Cart;
+use Stripe\Stripe;
+use App\Service\Cart;
+use App\Service\Mail;
 use App\Entity\Commande;
 use App\Form\CommandeType;
+use Stripe\Checkout\Session;
 use App\Entity\CommandeDetail;
+use App\Repository\ProduitRepository;
+use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CommandeController extends AbstractController
@@ -36,7 +42,7 @@ class CommandeController extends AbstractController
     /**
      * @Route("/commande/validation", name="commande_validation", methods={"POST"})
      */
-    public function add(Cart $cart, Request $request, EntityManagerInterface $manager): Response
+    public function validate(Cart $cart, Request $request, EntityManagerInterface $manager): Response
     {
         $form = $this->createForm(CommandeType::class, null, [
             'user' => $this->getUser()
@@ -91,5 +97,116 @@ class CommandeController extends AbstractController
         }
 
         return $this->redirectToRoute('produits');
+    }
+
+
+     /**
+     * @Route("/commande/create-session/{reference}", name="stripe_create_session")
+     */
+    public function stripe(EntityManagerInterface $manager, CommandeRepository $commandeRepo, ProduitRepository $produitRepo, Cart $cart, $reference): Response
+    {
+        $YOUR_DOMAIN = 'http://127.0.0.1:8000/';
+
+        $liste_produit_stripe = [];
+
+        $commande = $commandeRepo->findOneByReference($reference);
+
+        if(!$commande) {
+            new JsonResponse(['error' => 'commande']);
+        }
+
+        foreach ($commande->getCommandeDetails()->getValues() as $produit) {
+            $produit_object = $produitRepo->findOneByTitre($produit->getProduit());
+            $liste_produit_stripe[] = [
+                'price_data' => [
+                    'currency' => 'eur',
+                    'unit_amount' => $produit->getPrix(),
+                        'product_data' => [
+                            'name' => $produit->getProduit(),
+                            'images' => [$YOUR_DOMAIN."uploads/".$produit_object->getCouverture()],
+                        ],
+                    ],
+                'quantity' => $produit->getQuantite(),
+            ];
+        }
+        
+        $liste_produit_stripe[] = [
+            'price_data' => [
+                'currency' => 'eur',
+                'unit_amount' => $commande->getTransporteurPrix(),
+                    'product_data' => [
+                        'name' => $commande->getTransporteurTitre(),
+                        'images' => [$YOUR_DOMAIN],
+                    ],
+                ],
+            'quantity' => 1,
+        ];
+
+        Stripe::setApiKey('sk_test_51HlWG3GucqTraIY3sLTmaEBn253RapsttGz5sbEBh2w8SmA4QLyiudwT7ELRxGTs7YeuGmR6C8e3MTQgH6OlgzC000NZRNstat');
+        
+        $checkout_session = Session::create([
+        'customer_email' => $this->getUser()->getEmail(),    
+        'payment_method_types' => ['card'],
+        'line_items' => [
+            $liste_produit_stripe
+        ],
+        'mode' => 'payment',
+        'success_url' => $YOUR_DOMAIN . 'commande/succes/{CHECKOUT_SESSION_ID}',
+        'cancel_url' => $YOUR_DOMAIN . 'commande/erreur/{CHECKOUT_SESSION_ID}',
+        ]);
+
+        $commande->setStripeSessionId($checkout_session->id);
+        $manager->flush();
+
+        $response = new JsonResponse(['id' => $checkout_session->id]);
+
+        return $response;
+    }
+
+     /**
+     * @Route("/commande/succes/{stripeSessionId}", name="commande_succes")
+     */
+    public function succes(Cart $cart, EntityManagerInterface $manager, CommandeRepository $commandeRepo, $stripeSessionId): Response
+    {
+        $commande = $commandeRepo->findOneByStripeSessionId($stripeSessionId);
+        
+        if(!$commande || $commande->getUser() != $this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
+
+        if($commande->getState() == 0) {
+            $cart->remove();
+            $commande->setState(1);
+            $manager->flush();
+
+            //Mail  client confirm
+            $content = "Bonjour".$commande->getUser()->getFirstname()."<br>Merci pour votre commande!<br>L'Atelier Berthie";
+            $mail = new Mail();
+            $mail->send($this->getUser()->getEmail(), 
+            $commande->getUser()->getFirstname(), 
+            "Votre commande de l'Atelier Berthie est validée !", 
+            $content
+            );
+        }
+        
+        return $this->render('commande/succes.html.twig', [
+            'commande' => $commande
+        ]);
+    }
+
+    /**
+     * @Route("/commande/erreur/{stripeSessionId}", name="commande_erreur")
+     */
+    public function erreur(CommandeRepository $commandeRepo, $stripeSessionId): Response
+    {
+        $commande = $commandeRepo->findOneByStripeSessionId($stripeSessionId);
+        
+        if(!$commande || $commande->getUser() != $this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
+        
+        return $this->render('commande/erreur.html.twig', [
+            'commande' => $commande
+        ]);
     }
 }

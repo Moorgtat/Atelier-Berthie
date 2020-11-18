@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ChangePasswordType;
+use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,9 @@ class AccountController extends AbstractController
     /**
      * @Route("/compte", name="account")
      */
-    public function index(): Response
+    public function compte(): Response
     {
-        return $this->render('account/index.html.twig');
+        return $this->render('account/compte.html.twig');
     }
 
     /**
@@ -55,6 +56,33 @@ class AccountController extends AbstractController
         return $this->render('account/password.html.twig', [
             'form' => $form->createView(),
             'notification' => $notification
+        ]);
+    }
+
+    /**
+     * @Route("/compte/mes-commandes", name="account_commande")
+     */
+    public function allcommandes(CommandeRepository $commandeRepo): Response
+    {
+        $commandes = $commandeRepo->findSuccesCommandes($this->getUser());
+        return $this->render('account/commandes.html.twig', [
+            'commandes' => $commandes
+        ]);
+    }
+
+    /**
+     * @Route("/compte/mes-commandes/{reference}", name="account_commande_show")
+     */
+    public function showcommande(CommandeRepository $commandeRepo, $reference): Response
+    {
+        $commande = $commandeRepo->findOneByReference($reference);
+        
+        if(!$commande || $commande->getUser() != $this->getUser()) {
+            return $this->redirectToRoute('account_commande');
+        }
+        
+        return $this->render('account/commande_show.html.twig', [
+            'commande' => $commande
         ]);
     }
 }
