@@ -103,7 +103,7 @@ class CommandeController extends AbstractController
      /**
      * @Route("/commande/create-session/{reference}", name="stripe_create_session")
      */
-    public function stripe(EntityManagerInterface $manager, CommandeRepository $commandeRepo, ProduitRepository $produitRepo, Cart $cart, $reference): Response
+    public function stripe(EntityManagerInterface $manager, CommandeRepository $commandeRepo, ProduitRepository $produitRepo, $reference): Response
     {
         $YOUR_DOMAIN = 'http://127.0.0.1:8000/';
 

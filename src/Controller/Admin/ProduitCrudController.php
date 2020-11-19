@@ -23,16 +23,15 @@ class ProduitCrudController extends AbstractCrudController
     {
         return [
             TextField::new('titre'),
-            // SlugField::new('slug')->setTargetFieldName('titre')->hideOnIndex(),
             TextField::new('soustitre'),
             ImageField::new('couverture')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false]),
-            ImageField::new('image_1')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false])->hideOnIndex(),
-            ImageField::new('image_2')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false])->hideOnIndex(),
-            ImageField::new('image_3')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false])->hideOnIndex(),
+            ImageField::new('image_1')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false]),
+            ImageField::new('image_2')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false]),
+            ImageField::new('image_3')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false]),
             TextareaField::new('description'),
             BooleanField::new('isBest'),
             MoneyField::new('prix')->setCurrency('EUR'),
-            AssociationField::new('categorie')
+            AssociationField::new('categorie')->hideOnIndex()
         ];
     }
 
