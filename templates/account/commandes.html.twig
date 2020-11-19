@@ -34,9 +34,11 @@
         En attente de préparation
       {% elseif commande.state == 2 %}
         En cours de préparation
-      {% elseif commande.state == 3 %}
-        En cours de livraison
-      {% endif %}
+      {% elseif commande.state == 3 and commande.transporteurTitre == "Colissimo" %}
+            Commande envoyée
+        {% elseif commande.state == 3 and commande.transporteurTitre == "Retrait Magasin" %}
+            Commande retirée en magasin    
+        {% endif %}
       </td>
       <td>{{ ((commande.transporteurPrix + commande.getTotal) / 100) | number_format(2) }} €</td>
       <td class="text-right"><a href="{{ path('account_commande_show', {'reference' : commande.reference}) }}">Voir ma commande</a></td>

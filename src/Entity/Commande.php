@@ -65,6 +65,11 @@ class Commande
      */
     private $state;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $suivi;
+
     public function __construct()
     {
         $this->commandeDetails = new ArrayCollection();
@@ -89,6 +94,13 @@ class Commande
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(?int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getUser(): ?User
@@ -159,6 +171,16 @@ class Commande
         return $this->commandeDetails;
     }
 
+    public function setCommandeDetail(CommandeDetail $commandeDetail): self
+    {
+        if (!$this->commandeDetails->contains($commandeDetail)) {
+            $this->commandeDetails[] = $commandeDetail;
+            $commandeDetail->setMaCommande($this);
+        }
+
+        return $this;
+    }
+
     public function addCommandeDetail(CommandeDetail $commandeDetail): self
     {
         if (!$this->commandeDetails->contains($commandeDetail)) {
@@ -213,6 +235,18 @@ class Commande
     public function setState(int $state): self
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    public function getSuivi(): ?string
+    {
+        return $this->suivi;
+    }
+
+    public function setSuivi(?string $suivi): self
+    {
+        $this->suivi = $suivi;
 
         return $this;
     }

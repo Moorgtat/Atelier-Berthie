@@ -10,15 +10,20 @@
             En attente de préparation
         {% elseif commande.state == 2 %}
             En cours de préparation
-        {% elseif commande.state == 3 %}
-            En cours de livraison
+        {% elseif commande.state == 3 and commande.transporteurTitre == "Colissimo" %}
+            Commande envoyée
+        {% elseif commande.state == 3 and commande.transporteurTitre == "Retrait Magasin" %}
+            Commande retirée en magasin    
         {% endif %}
         </small>
     </h4>
     <hr>
     <strong>Commande passée le :</strong> <small>{{ commande.createdAt | date('d/m/Y') }}</small> <br>
     <strong>Reference :</strong> <small>{{ commande.reference }}</small> <br>
-    <strong>Transporteur choisi :</strong> {{ commande.transporteurTitre }}
+    <strong>Transporteur choisi :</strong> {{ commande.transporteurTitre }} <br>
+    {% if commande.suivi %}
+    <strong>Numero de suivi :</strong> {{ commande.suivi }} - <a href="https://www.laposte.fr/outils/suivre-vos-envois" target="_blank">Suivre votre livraison</a>
+    {% endif %}
     <hr>
 <div class="row">
         <div class="col-md-4">

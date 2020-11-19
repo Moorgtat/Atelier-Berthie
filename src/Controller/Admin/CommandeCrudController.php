@@ -35,12 +35,20 @@ class CommandeCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $updatePreparation = Action::new('updatePreparation', 'Préparation en cours', 'fas fa-box-open')->linkToCrudAction('updatePreparation');
-        $updateLivraison = Action::new('updateLivraison', 'Livraison en cours', 'fas fa-truck')->linkToCrudAction('updateLivraison');
+        $updatePreparation = Action::new('updatePreparation', 'Commencer préparation', 'fas fa-box-open')->linkToCrudAction('updatePreparation')->displayIf(static function ($entity) {
+            return $entity->getState() == 1;
+        });
+        $updateLivraison = Action::new('updateLivraison', 'Confirmer livraison', 'fas fa-truck')->linkToCrudAction('updateLivraison')->displayIf(static function ($entity) {
+            return $entity->getState() == 2;
+        });
+        $updateSuivi = Action::new('updateSuivi', 'Renvoyer le numéro de suivi', 'fas fa-truck')->linkToCrudAction('updateSuivi')->displayIf(static function ($entity) {
+            return $entity->getState() == 3;
+        });
 
         return $actions
             ->add('detail', $updatePreparation)
             ->add('detail', $updateLivraison)
+            ->add('detail', $updateSuivi)
             ->add('index', 'detail')
             ->remove('index', 'edit')
             ->remove('index', 'new');
@@ -52,11 +60,11 @@ class CommandeCrudController extends AbstractCrudController
         $commande->setState(2);
         $this->entityManager->flush();
 
-        $this->addFlash('notice', "<span style='color: green;'><strong>La commande".$commande->getReference()." est bien en cours de préparation.</strong></span>");
+        $this->addFlash('success', "La commande".$commande->getReference()." est bien en cours de préparation.");
         
         $url = $this->crudUrlGenerator->build()
             ->setController(CommandeCrudController::class)
-            ->setAction('index')
+            ->setAction('detail')
             ->generateUrl();
 
         return $this->redirect($url);
@@ -68,11 +76,35 @@ class CommandeCrudController extends AbstractCrudController
         $commande->setState(3);
         $this->entityManager->flush();
 
-        $this->addFlash('notice', "<span style='color: green;'><strong>La commande".$commande->getReference()." est bien en cours de livraison.</strong></span>");
+        if ($commande.getTransporteurTitre() == "Colissimo")
+        {
+            //TO DO Envoi mail envie numéro de suivi
+            $this->addFlash('success', "Un mail de confirmation d'éxpédition a été envoyé pour la commande".$commande->getReference()." avec le numero de suivi:".$commande->getSuivi().".");
+        }
+        elseif ($commande.getTransporteurTitre() == "Retrait Magasin")
+        {
+            //TO DO Envoi mail Commande retirée en magasin
+            $this->addFlash('success', "Un mail de confirmation de retrait en magasin a été envoyé pour la commande".$commande->getReference().".");
+        }
+
+        $url = $this->crudUrlGenerator->build()
+            ->setController(CommandeCrudController::class)
+            ->setAction('detail')
+            ->generateUrl();
+
+        return $this->redirect($url);
+    }
+
+    public function updateSuivi(AdminContext $context)
+    {
+        $commande = $context->getEntity()->getInstance();
+
+        //TO DO Envoi mail envie numéro de suivi
+        $this->addFlash('success', "Un mail avec le numero de suivi ".$commande->getSuivi()." pour la commande ".$commande->getReference()." a bien été renvoyé.");
         
         $url = $this->crudUrlGenerator->build()
             ->setController(CommandeCrudController::class)
-            ->setAction('index')
+            ->setAction('detail')
             ->generateUrl();
 
         return $this->redirect($url);
@@ -84,17 +116,18 @@ class CommandeCrudController extends AbstractCrudController
             IdField::new('id'),
             TextField::new('stringCreatedAt', 'Passée le'),
             TextField::new('user.getFullName', 'Utilisateur'),
+            ArrayField::new('commandeDetails', 'Produits achetés')->setFormTypeOptions(['mapped' => false, 'required' => false])->hideOnIndex(),
             TextEditorField::new('livraison', 'Adresse de livraison')->onlyOnDetail(),
-            MoneyField::new('total', 'Total')->setCurrency('EUR'),
+            TextField::new('suivi', 'Numéro de suivi'),
+            MoneyField::new('total', 'Total')->setCurrency('EUR')->setFormTypeOptions(['mapped' => false, 'required' => false]),
             TextField::new('transporteurTitre', 'Transporteur'),
             MoneyField::new('transporteurPrix', 'Frais de port')->setCurrency('EUR'),
             ChoiceField::new('state')->setChoices([
-                'Non payée' => 0,
-                'Payée' => 1,
+                'Commande non confirmée' => 0,
+                'Commande confirmée' => 1,
                 'Préparation en cours' => 2,
-                'Livraison en cours' => 3
-            ]),
-            ArrayField::new('commandeDetails', 'Produits achetés')->hideOnIndex()
+                'Commande finalisée' => 3
+            ])
         ];
     }
 
