@@ -18,20 +18,17 @@
         </small>
     </h4>
     <hr>
+    <div class="row">
+        <div class="col-md-5">
     <strong>Commande passée le :</strong> <small>{{ commande.createdAt | date('d/m/Y') }}</small> <br>
     <strong>Reference :</strong> <small>{{ commande.reference }}</small> <br>
     <strong>Transporteur choisi :</strong> {{ commande.transporteurTitre }} <br>
     {% if commande.suivi %}
     <strong>Numero de suivi :</strong> {{ commande.suivi }} - <a href="https://www.laposte.fr/outils/suivre-vos-envois" target="_blank">Suivre votre livraison</a>
     {% endif %}
-    <hr>
-<div class="row">
-        <div class="col-md-4">
-            <strong>Mon adresse de livraison:</strong><br>
-            {{ commande.livraison | raw }}
         </div>
-        <div class="col-md-8">
-            <b>Recapitulatif de ma commande:</b>
+        <div class="col-md-7">
+        <b>Recapitulatif de ma commande:</b>
             {% set total = null %}
             {% for produit in commande.commandeDetails %}
                 <div class="row">
@@ -46,12 +43,14 @@
             {% set total = total + (produit.prix * produit.quantite) %}
             {% endfor %}
         </div>
-    </div>
+    </div>    
     <hr>
-    <div class="row">
-        <div class="col-8">
+<div class="row">
+        <div class="col-md-8">
+            <strong>Mon adresse de livraison:</strong><br>
+            {{ commande.livraison | raw }}
         </div>
-        <div class="col-4">
+        <div class="col-md-4">
             <table>
                 <tr>
                     <td><strong>Total du panier: </strong></td>
@@ -71,7 +70,7 @@
             </table>
         </div>
     </div>
-        <hr>
+    <hr>
         <a href="{{ path('account_commande') }}">Retour</a>
 </div>
 {% endblock %}

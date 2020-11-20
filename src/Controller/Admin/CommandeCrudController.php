@@ -76,15 +76,15 @@ class CommandeCrudController extends AbstractCrudController
         $commande->setState(3);
         $this->entityManager->flush();
 
-        if ($commande.getTransporteurTitre() == "Colissimo")
+        if ($commande->getTransporteurTitre() == "Colissimo")
         {
             //TO DO Envoi mail envie numéro de suivi
-            $this->addFlash('success', "Un mail de confirmation d'éxpédition a été envoyé pour la commande".$commande->getReference()." avec le numero de suivi:".$commande->getSuivi().".");
+            $this->addFlash('success', "<div class='text-center'>Un mail de confirmation d'éxpédition a été envoyé pour la commande <strong>".$commande->getReference()."</strong> avec le numero de suivi: ".$commande->getSuivi().".</div>");
         }
-        elseif ($commande.getTransporteurTitre() == "Retrait Magasin")
+        elseif ($commande->getTransporteurTitre() == "Retrait Magasin")
         {
             //TO DO Envoi mail Commande retirée en magasin
-            $this->addFlash('success', "Un mail de confirmation de retrait en magasin a été envoyé pour la commande".$commande->getReference().".");
+            $this->addFlash('success', "<div class='text-center'>Un mail de confirmation de retrait en magasin a été envoyé pour la commande <strong>".$commande->getReference()."</strong>.</div>");
         }
 
         $url = $this->crudUrlGenerator->build()
@@ -100,7 +100,7 @@ class CommandeCrudController extends AbstractCrudController
         $commande = $context->getEntity()->getInstance();
 
         //TO DO Envoi mail envie numéro de suivi
-        $this->addFlash('success', "Un mail avec le numero de suivi ".$commande->getSuivi()." pour la commande ".$commande->getReference()." a bien été renvoyé.");
+        $this->addFlash('success', "<div class='text-center'>Un mail avec le numero de suivi <strong>".$commande->getSuivi()."</strong> pour la commande <strong>".$commande->getReference()." </strong>a bien été renvoyé.</div>");
         
         $url = $this->crudUrlGenerator->build()
             ->setController(CommandeCrudController::class)
@@ -124,7 +124,7 @@ class CommandeCrudController extends AbstractCrudController
             MoneyField::new('transporteurPrix', 'Frais de port')->setCurrency('EUR'),
             ChoiceField::new('state')->setChoices([
                 'Commande non confirmée' => 0,
-                'Commande confirmée' => 1,
+                'Commande à traiter' => 1,
                 'Préparation en cours' => 2,
                 'Commande finalisée' => 3
             ])

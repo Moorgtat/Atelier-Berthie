@@ -5,10 +5,11 @@ namespace App\EventSubscriber;
 use ErrorException;
 use App\Entity\Header;
 use App\Entity\Produit;
-use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityDeletedEvent;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityDeletedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 
@@ -96,6 +97,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
                 $filesystem->remove([$project_dir.'/public/uploads/'.$oldImage]);
                 } catch (ErrorException $e) {
                     echo "Une erreur s'est produite durant la suppression de l'header.";
+                } catch (IOException $e) {
+                    echo "Une erreur s'est produite durant la suppression de l'header.";
                 }
             }    
         elseif ($entityName == 'Produit')
@@ -112,6 +115,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
                     $filesystem->remove([$project_dir.'/public/uploads/'.$oldImage_2]);
                     $filesystem->remove([$project_dir.'/public/uploads/'.$oldImage_3]);
                 } catch (ErrorException $e) {
+                    echo "Une erreur s'est produite durant la suppression du produit.";
+                } catch (IOException $e) {
                     echo "Une erreur s'est produite durant la suppression du produit.";
                 }
             }
@@ -141,6 +146,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
                 $filesystem->remove([$project_dir.'/public/uploads/'.$oldImage]);
                 } catch (ErrorException $e) {
                     echo "Une erreur s'est produite durant la mise a jour de l'header.";
+                } catch (IOException $e) {
+                    echo "Une erreur s'est produite durant la mise a jour du produit.";
                 }
                 move_uploaded_file($tmp_name_image, $project_dir.'/public/uploads/'.$filename_image.'.'.$extension_image);
                 $entity->setImage($filename_image.'.'.$extension_image);
@@ -159,6 +166,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
                 $filesystem->remove([$project_dir.'/public/uploads/'.$oldCouverture]);
                 } catch (ErrorException $e) {
                     echo "Une erreur s'est produite durant la mise a jour du produit.";
+                } catch (IOException $e) {
+                    echo "Une erreur s'est produite durant la mise a jour du produit.";
                 }
                 move_uploaded_file($tmp_name_couverture, $project_dir.'/public/uploads/'.$filename_couverture.'.'.$extension_couverture);
 
@@ -176,6 +185,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
                 $filesystem->remove([$project_dir.'/public/uploads/'.$oldImage_1]);
                 } catch (ErrorException $e) {
                     echo "Une erreur s'est produite durant la mise a jour du produit.";
+                }catch (IOException $e) {
+                    echo "Une erreur s'est produite durant la mise a jour du produit.";
                 }
                 move_uploaded_file($tmp_name_image1, $project_dir.'/public/uploads/'.$filename_image1.'.'.$extension_image1);
                 $entity->setImage1($filename_image1.'.'.$extension_image1);
@@ -192,6 +203,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
                 $filesystem->remove([$project_dir.'/public/uploads/'.$oldImage_2]);
                 } catch (ErrorException $e) {
                     echo "Une erreur s'est produite durant la mise a jour du produit.";
+                } catch (IOException $e) {
+                    echo "Une erreur s'est produite durant la mise a jour du produit.";
                 }
                 move_uploaded_file($tmp_name_image2, $project_dir.'/public/uploads/'.$filename_image2.'.'.$extension_image2);
                 $entity->setImage2($filename_image2.'.'.$extension_image2);
@@ -207,6 +220,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
                 try {
                 $filesystem->remove([$project_dir.'/public/uploads/'.$oldImage_3]);
                 } catch (ErrorException $e) {
+                    echo "Une erreur s'est produite durant la mise a jour du produit.";
+                } catch (IOException $e) {
                     echo "Une erreur s'est produite durant la mise a jour du produit.";
                 }
                 move_uploaded_file($tmp_name_image3, $project_dir.'/public/uploads/'.$filename_image3.'.'.$extension_image3);

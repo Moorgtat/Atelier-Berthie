@@ -33,7 +33,7 @@ class CommandeController extends AbstractController
             'user' => $this->getUser()
         ]);
 
-        return $this->render('commande/index.html.twig', [
+        return $this->render('commande/choix_livraison.html.twig', [
             'form' => $form->createView(),
             'cart' => $cart->getFull()
         ]);
