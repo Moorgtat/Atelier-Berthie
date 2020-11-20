@@ -179,8 +179,8 @@ class CommandeController extends AbstractController
             $commande->setState(1);
             $manager->flush();
 
-            //Mail  client confirm
-            $content = "Bonjour".$commande->getUser()->getFirstname()."<br>Merci pour votre commande!<br>L'Atelier Berthie";
+            //Mailclient succes confirm
+            $content = "Bonjour".$commande->getUser()->getFirstname()."<br>Succes Commande ! Merci pour votre commande!<br>L'Atelier Berthie";
             $mail = new Mail();
             $mail->send($this->getUser()->getEmail(), 
             $commande->getUser()->getFirstname(), 
@@ -197,7 +197,7 @@ class CommandeController extends AbstractController
     /**
      * @Route("/commande/erreur/{stripeSessionId}", name="commande_erreur")
      */
-    public function erreur(CommandeRepository $commandeRepo, $stripeSessionId): Response
+    public function erreur(EntityManagerInterface $manager, CommandeRepository $commandeRepo, $stripeSessionId): Response
     {
         $commande = $commandeRepo->findOneByStripeSessionId($stripeSessionId);
         
@@ -205,6 +205,23 @@ class CommandeController extends AbstractController
             return $this->redirectToRoute('home');
         }
         
+        if($commande->getState() == 0) {
+
+            $commande->setState(5);
+            $manager->flush();
+
+            //Mail client echec confirm
+            $content = "Bonjour".$commande->getUser()->getFirstname()."<br>Echec paiement, le paiment n'a pas été validé par Stripe!<br>
+             Votre commande a échoué!
+             <br>L'Atelier Berthie";
+            $mail = new Mail();
+            $mail->send($this->getUser()->getEmail(), 
+            $commande->getUser()->getFirstname(), 
+            "Votre commande de l'Atelier Berthie est validée !", 
+            $content
+            );
+        }
+
         return $this->render('commande/erreur.html.twig', [
             'commande' => $commande
         ]);

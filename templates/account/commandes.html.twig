@@ -38,6 +38,8 @@
             Commande envoyée
         {% elseif commande.state == 3 and commande.transporteurTitre == "Retrait Magasin" %}
             Commande retirée en magasin    
+        {% elseif commande.state == 5 %}
+            Le paiement de cette commande a échoué        
         {% endif %}
       </td>
       <td>{{ ((commande.transporteurPrix + commande.getTotal) / 100) | number_format(2) }} €</td>

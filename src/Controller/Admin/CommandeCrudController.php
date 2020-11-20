@@ -126,7 +126,8 @@ class CommandeCrudController extends AbstractCrudController
                 'Commande non confirmée' => 0,
                 'Commande à traiter' => 1,
                 'Préparation en cours' => 2,
-                'Commande finalisée' => 3
+                'Commande finalisée' => 3,
+                'Paiement commande refusé' => 5
             ])
         ];
     }
