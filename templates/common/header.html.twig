@@ -1,20 +1,38 @@
 <!-- Navbar -->
-    <div class="container">
-       
-        <a href="https://www.instagram.com/atelier_berthie/" target="_blank">Insta</a>
-
-        <a href="{{ path('produits') }}">Shop</a>
-
-        <a href="{{ path('home') }}">Logo</a>    
-
-        <a href="{{ path('about') }}">About</a>       
-
-        {% if app.user %}
-            <a href="{{ path('account') }}">Mon compte</a> | <a href="{{ path('app_logout') }}">Déconnexion</a>
-        {% else %}
-            <a href="{{ path('app_login') }}">Connexion</a>
-        {% endif %}
-
-        <a href="{{ path('cart') }}" class="mx-3"><i class="fas fa-shopping-cart"></i></a>
-
+<div class="app600">
+    <a href="{{ path('home') }}"><img src="{{ asset("assets/img/BerthieLogo.jpg") }}" class="logo" alt="Le Logo de Berthie"></a>
+</div>
+<div class="row">
+    <div class="col-1">
     </div>
+    <div id="navbar" class="col-10">
+        <div class="nav-ab-item">
+            <a href="https://www.instagram.com/atelier_berthie/" target="_blank">INSTA</a>
+        </div>
+        <div class="nav-ab-item">
+            <a href="{{ path('produits') }}">SHOP</a>
+        </div>
+        <div class="nav-ab-item disp600">
+            <a href="{{ path('home') }}"><img src="{{ asset("assets/img/BerthieLogo.jpg") }}" class="logo" alt="Le Logo de Berthie"></a>
+        </div>
+        <div class="nav-ab-item">
+            <a href="{{ path('about') }}">ABOUT</a>
+        </div>
+        {% if app.user %}
+            <div class="nav-ab-item">
+                <a href="{{ path('account') }}">PROFIL</a>
+                <a href="{{ path('app_logout') }}"><i class="far fa-times-circle"></i></a>
+            </div>
+        {% else %}
+            <div class="nav-ab-item">
+                <a href="{{ path('app_login') }}">COMPTE</a>
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-1">
+        <a href="{{ path('cart') }}" class="panier">
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+    </div>
+</div>
+

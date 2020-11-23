@@ -1,7 +1,45 @@
 body {
-    position: relative;
-    min-height: 100vh;
+    margin: 0,
 }
+
+a, a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.disp600 {
+    margin: 0;
+}
+
+.app600 {
+    display: none;
+}
+
+/* AFFICHAGE HEADER */
+
+#navbar  {
+    min-height: 200px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr, 1fr, 1fr, 1fr, 1fr, 50px;
+}
+.nav-ab-item {
+    font-family: 'Raleway', sans-serif;
+    font-size: calc(1rem + 0.5vw);
+    display: grid;
+    justify-self: center;
+    align-items: center;
+}
+.logo {
+    width: 200px;
+}
+.panier {
+    position: absolute;
+    top: 30px;
+    right: calc(20px + 2vw);
+}
+
+/* AFFICHAGE HOME */
 
 /* AFFICHAGE SHOP */
 .produit-item {
@@ -20,4 +58,14 @@ body {
 .custom-minus-plus a, .custom-minus-plus a:hover{
     text-decoration: none;
     color: grey;
+}
+
+@media (max-width: 600px) {
+.disp600 {
+    display: none;
+}
+
+.app600 {
+    display: grid;
+}
 }
