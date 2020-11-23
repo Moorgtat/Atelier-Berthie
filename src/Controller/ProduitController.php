@@ -13,24 +13,26 @@ use Symfony\Component\HttpFoundation\Request;
 class ProduitController extends AbstractController
 {
     /**
-     * @Route("/nos-produits", name="produits")
+     * @Route("/shop", name="produits")
      */
-    public function allProduit(ProduitRepository $repo, Request $request): Response
+    public function allProduit(ProduitRepository $repo): Response
     {
-        $search = new Search();
+        // $search = new Search();
 
-        $form = $this->createForm(SearchType::class, $search);
-        $form->handleRequest($request);
+        // $form = $this->createForm(SearchType::class, $search);
+        // $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
-            $produits = $repo->findWithSearch($search);
-        } else {
-            $produits = $repo->findAll();
-        }
+        // if($form->isSubmitted() && $form->isValid()) {
+        //     $produits = $repo->findWithSearch($search);
+        // } else {
+        //     $produits = $repo->findAll();
+        // }
 
-        return $this->render('produit/all.html.twig', [
-            'produits' => $produits,
-            'form' => $form->createView()
+        $produits = $repo->findAll();
+
+        return $this->render('produit/shop.html.twig', [
+            'produits' => $produits
+            // 'form' => $form->createView()
         ]);
     }
 
@@ -40,14 +42,14 @@ class ProduitController extends AbstractController
     public function show($slug, ProduitRepository $repo): Response
     {
         $produit = $repo->findOneBySlug($slug);
-        $produits = $repo->findByIsBest(true);
-
+        // $produits = $repo->findByIsBest(true);
         if (!$produit) {
             return $this->redirectToRoute('produits');
         }
+        
         return $this->render('produit/show.html.twig', [
-            'produit' => $produit,
-            'produits' => $produits
+            'produit' => $produit
+            // 'produits' => $produits
         ]);
     }
 }

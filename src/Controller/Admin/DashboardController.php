@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Entity\Produit;
 use App\Entity\Commande;
 use App\Entity\Categorie;
-use App\Entity\Header;
 use App\Entity\Transporteur;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,6 +40,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Catégories', 'fa fa-list', Categorie::class);
         yield MenuItem::linkToCrud('Produits', 'fa fa-tag', Produit::class);
         yield MenuItem::linkToCrud('Transporteurs', 'fa fa-truck', Transporteur::class);
-        yield MenuItem::linkToCrud('Header', 'fa fa-desktop', Header::class);
     }
 }

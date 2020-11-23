@@ -14,6 +14,8 @@
             Commande envoyée
         {% elseif commande.state == 3 and commande.transporteurTitre == "Retrait Magasin" %}
             Commande retirée en magasin    
+        {% elseif commande.state == 5 %}
+            Le paiement de cette commande a échoué
         {% endif %}
         </small>
     </h4>

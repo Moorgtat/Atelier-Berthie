@@ -2,28 +2,8 @@ body {
     position: relative;
     min-height: 100vh;
 }
-.navbar-item-custom, .navbar-item-custom a {
-    color: white;
-    text-decoration: none;
-}
-.footer-custom {
-    text-align: center;
-    color: white;
-    position: absolute;
-    margin-top: 150px;
-    bottom: 0;
-    width: 100%;
-    padding-top: 15px;
-    background-color: #343a40;
-}
-.bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+
+/* AFFICHAGE SHOP */
 .produit-item {
     margin-top: 40px;
 }
@@ -35,13 +15,9 @@ body {
     font-size: 14px;
     font-weight: bold;
 }
+
+/* AFFICHAGE CART */
 .custom-minus-plus a, .custom-minus-plus a:hover{
     text-decoration: none;
     color: grey;
-}
-
-@media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-    }
 }

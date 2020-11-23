@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\HeaderRepository;
+
 use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,14 +13,22 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(ProduitRepository $produitRepo, HeaderRepository $headerRepo): Response
+    public function index(ProduitRepository $produitRepo): Response
     {
-        $produits = $produitRepo->findByIsBest(true);
-        $headers = $headerRepo->findAll();
+        // $produits = $produitRepo->findByIsBest(true);
+
+        $produits = $produitRepo->findAll();
         
-        return $this->render('home/accueil.html.twig', [
-            'produits' => $produits,
-            'headers' => $headers
+        return $this->render('home/home.html.twig', [
+            'produits' => $produits
         ]);
+    }
+
+    /**
+     * @Route("/about", name="about")
+     */
+    public function about(ProduitRepository $produitRepo): Response
+    {  
+        return $this->render('home/about.html.twig');
     }
 }

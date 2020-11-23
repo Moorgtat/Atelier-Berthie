@@ -3,7 +3,6 @@
 namespace App\EventSubscriber;
 
 use ErrorException;
-use App\Entity\Header;
 use App\Entity\Produit;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -64,22 +63,23 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         $entity->setImage2($filename_image2.'.'.$extension_image2);
         $entity->setImage3($filename_image3.'.'.$extension_image3);
         }
-        elseif ($entityName == 'Header')
-        {
-            $entity = $event->getEntityInstance();
-            $tmp_name_image = $_FILES[$entityName]['tmp_name']['image'];
-            $filename_image = uniqid();
-            $extension_image = pathinfo($_FILES[$entityName]['name']['image'], PATHINFO_EXTENSION);
-            $project_dir = $this->appKernel->getProjectDir();
-            move_uploaded_file($tmp_name_image, $project_dir.'/public/uploads/'.$filename_image.'.'.$extension_image);
-            $entity->setImage($filename_image.'.'.$extension_image);
+        // elseif ($entityName == 'OtherEntity')
+        // {
+        //     $entity = $event->getEntityInstance();
+        //     $tmp_name_image = $_FILES[$entityName]['tmp_name']['image'];
+        //     $filename_image = uniqid();
+        //     $extension_image = pathinfo($_FILES[$entityName]['name']['image'], PATHINFO_EXTENSION);
+        //     $project_dir = $this->appKernel->getProjectDir();
+        //     move_uploaded_file($tmp_name_image, $project_dir.'/public/uploads/'.$filename_image.'.'.$extension_image);
+        //     $entity->setImage($filename_image.'.'.$extension_image);
 
-        }
+        // }
     }
 
     public function deleteEntity(BeforeEntityDeletedEvent $event)
     {
-        if(!($event->getEntityInstance() instanceof Produit || $event->getEntityInstance() instanceof Header))
+        // TODO Ajoute possible:  || $event->getEntityInstance() instanceof Entity
+        if(!($event->getEntityInstance() instanceof Produit))
         {
             return;
         }
@@ -88,20 +88,20 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         $entityName = $reflexion->getShortName();
         $filesystem = new Filesystem();
 
-        if ($entityName == 'Header') 
-            {
-                $entity = $event->getEntityInstance();
-                $project_dir = $this->appKernel->getProjectDir();
-                $oldImage = $entity->getImage();
-                try {
-                $filesystem->remove([$project_dir.'/public/uploads/'.$oldImage]);
-                } catch (ErrorException $e) {
-                    echo "Une erreur s'est produite durant la suppression de l'header.";
-                } catch (IOException $e) {
-                    echo "Une erreur s'est produite durant la suppression de l'header.";
-                }
-            }    
-        elseif ($entityName == 'Produit')
+        // if ($entityName == 'OtherEntity') 
+        //     {
+        //         $entity = $event->getEntityInstance();
+        //         $project_dir = $this->appKernel->getProjectDir();
+        //         $oldImage = $entity->getImage();
+        //         try {
+        //         $filesystem->remove([$project_dir.'/public/uploads/'.$oldImage]);
+        //         } catch (ErrorException $e) {
+        //             echo "Une erreur s'est produite durant la suppression de l'header.";
+        //         } catch (IOException $e) {
+        //             echo "Une erreur s'est produite durant la suppression de l'header.";
+        //         }
+        //     }    
+        if ($entityName == 'Produit')
             {
                 $entity = $event->getEntityInstance();
                 $project_dir = $this->appKernel->getProjectDir();
@@ -124,7 +124,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
     public function updateEntity(BeforeEntityUpdatedEvent $event)
     {
-        if(!($event->getEntityInstance() instanceof Produit || $event->getEntityInstance() instanceof Header))
+        // TODO Ajoute possible:  || $event->getEntityInstance() instanceof Entity
+        if(!($event->getEntityInstance() instanceof Produit))
         {
             return;
         }
@@ -133,27 +134,27 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         $entityName = $reflexion->getShortName();
         $filesystem = new Filesystem();
 
-        if ($entityName == 'Header') 
-        {
-            if($_FILES[$entityName]['tmp_name']['image'] != "") {
-                $entity = $event->getEntityInstance();
-                $tmp_name_image = $_FILES[$entityName]['tmp_name']['image'];
-                $filename_image = uniqid();
-                $extension_image = pathinfo($_FILES[$entityName]['name']['image'], PATHINFO_EXTENSION);
-                $project_dir = $this->appKernel->getProjectDir();
-                $oldImage = $entity->getImage();
-                try {
-                $filesystem->remove([$project_dir.'/public/uploads/'.$oldImage]);
-                } catch (ErrorException $e) {
-                    echo "Une erreur s'est produite durant la mise a jour de l'header.";
-                } catch (IOException $e) {
-                    echo "Une erreur s'est produite durant la mise a jour du produit.";
-                }
-                move_uploaded_file($tmp_name_image, $project_dir.'/public/uploads/'.$filename_image.'.'.$extension_image);
-                $entity->setImage($filename_image.'.'.$extension_image);
-            }
-        }    
-        elseif ($entityName == 'Produit')
+        // if ($entityName == 'OtherEntity') 
+        // {
+        //     if($_FILES[$entityName]['tmp_name']['image'] != "") {
+        //         $entity = $event->getEntityInstance();
+        //         $tmp_name_image = $_FILES[$entityName]['tmp_name']['image'];
+        //         $filename_image = uniqid();
+        //         $extension_image = pathinfo($_FILES[$entityName]['name']['image'], PATHINFO_EXTENSION);
+        //         $project_dir = $this->appKernel->getProjectDir();
+        //         $oldImage = $entity->getImage();
+        //         try {
+        //         $filesystem->remove([$project_dir.'/public/uploads/'.$oldImage]);
+        //         } catch (ErrorException $e) {
+        //             echo "Une erreur s'est produite durant la mise a jour de l'header.";
+        //         } catch (IOException $e) {
+        //             echo "Une erreur s'est produite durant la mise a jour du produit.";
+        //         }
+        //         move_uploaded_file($tmp_name_image, $project_dir.'/public/uploads/'.$filename_image.'.'.$extension_image);
+        //         $entity->setImage($filename_image.'.'.$extension_image);
+        //     }
+        // }    
+        if ($entityName == 'Produit')
         {
             if($_FILES[$entityName]['tmp_name']['couverture'] != "") {
                 $entity = $event->getEntityInstance();
@@ -232,7 +233,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
     public function setEntity(BeforeEntityPersistedEvent $event)
     {
-        if(!($event->getEntityInstance() instanceof Produit || $event->getEntityInstance() instanceof Header))
+        // TODO Ajoute possible:  || $event->getEntityInstance() instanceof Entity
+        if(!($event->getEntityInstance() instanceof Produit))
         {
             return;
         }

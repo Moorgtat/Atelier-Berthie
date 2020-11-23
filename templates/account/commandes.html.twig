@@ -30,16 +30,16 @@
       <td>{{ commande.reference }}</td>
       <td>{{ commande.commandeDetails | length }}</td>
       <td>
-      {% if commande.state == 1 %}
-        En attente de préparation
-      {% elseif commande.state == 2 %}
-        En cours de préparation
-      {% elseif commande.state == 3 and commande.transporteurTitre == "Colissimo" %}
+        {% if commande.state == 1 %}
+          En attente de préparation
+        {% elseif commande.state == 2 %}
+          En cours de préparation
+        {% elseif commande.state == 3 and commande.transporteurTitre == "Colissimo" %}
             Commande envoyée
         {% elseif commande.state == 3 and commande.transporteurTitre == "Retrait Magasin" %}
             Commande retirée en magasin    
         {% elseif commande.state == 5 %}
-            Le paiement de cette commande a échoué        
+            Le paiement de cette commande a échoué
         {% endif %}
       </td>
       <td>{{ ((commande.transporteurPrix + commande.getTotal) / 100) | number_format(2) }} €</td>
@@ -49,6 +49,5 @@
   </tbody>
 </table>
 {% endif %}
-
 </div>
 {% endblock %}
