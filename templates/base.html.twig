@@ -1,25 +1,17 @@
 <!doctype html>
-<html lang="fr">
+<html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content=" Atelier Berthie - Votre boutique de bijous fait-main à Vannes.">
-    <meta name="author" content="Olivia & Berthie">
-    {# TODO
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset("assets/icones/apple-touch-icon.png") }}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset("assets/icones/favicon-32x32.png") }}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset("assets/icones/favicon-16x16.png") }}"> 
-    #}
+    <meta name="author" content="Atelier Berthie">
     <title>Atelier Berthie - {% block title %}{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico"/>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    {% block javascript %}
-    {% endblock %}
-    {% block stylesheet %}
-    <!-- Bootstrap core CSS -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <!-- App core CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+        <!-- App core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
+    {% block javascript %}
     {% endblock %}
 </head>
 <body>
@@ -37,12 +29,12 @@
     {% block body %}
     {% endblock %}
     {{ include('common/footer.html.twig') }}
-    <!-- Font Awesome icons (free version)-->
+</body>
+{% block script %}
+{% endblock %}
+<!-- Font Awesome icons (free version)-->
 	<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Bootstrap-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
-</body>
-{% block script %}
-{% endblock %}
 </html>

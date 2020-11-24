@@ -1,5 +1,11 @@
+html {
+    padding: 0;
+    margin: 0;
+}
+
 body {
-    margin: 0,
+    padding: 0;
+    margin: 0;
 }
 
 a, a:hover {
@@ -16,12 +22,11 @@ a, a:hover {
 }
 
 /* AFFICHAGE HEADER */
-
 #navbar  {
-    min-height: 200px;
     display: grid;
+    height: 200px;
     grid-auto-flow: column;
-    grid-template-columns: 1fr, 1fr, 1fr, 1fr, 1fr, 50px;
+    grid-template-columns: 1fr, 1fr, 1fr, 1fr, 1fr;
 }
 .nav-ab-item {
     font-family: 'Raleway', sans-serif;
@@ -36,23 +41,34 @@ a, a:hover {
 .panier {
     position: absolute;
     top: 30px;
-    right: calc(20px + 2vw);
+    right: 30px;
 }
 
 /* AFFICHAGE HOME */
 
 /* AFFICHAGE SHOP */
+
 .produit-item {
-    margin-top: 40px;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
-.produit-item .produit-soustitre{
+.img-shop {
+    width: 100%;
+    height: 100%;
+}
+/*.produit-item {
+    margin-top: 20px;
+}
+ .produit-item .produit-soustitre{
     display: block;
     margin-bottom: 10px;
 }
 .produit-item .produit-prix{
     font-size: 14px;
     font-weight: bold;
-}
+} */
+
 
 /* AFFICHAGE CART */
 .custom-minus-plus a, .custom-minus-plus a:hover{
@@ -61,11 +77,14 @@ a, a:hover {
 }
 
 @media (max-width: 600px) {
-.disp600 {
-    display: none;
-}
-
-.app600 {
-    display: grid;
-}
+    .disp600 {
+        display: none;
+    }
+    .app600 {
+        display: flex;
+        justify-content: center;
+    }
+    #navbar  {
+    height: 60px;
+    }
 }

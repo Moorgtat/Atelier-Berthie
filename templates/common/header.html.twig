@@ -1,38 +1,32 @@
-<!-- Navbar -->
-<div class="app600">
-    <a href="{{ path('home') }}"><img src="{{ asset("assets/img/BerthieLogo.jpg") }}" class="logo" alt="Le Logo de Berthie"></a>
-</div>
-<div class="row">
-    <div class="col-1">
-    </div>
-    <div id="navbar" class="col-10">
-        <div class="nav-ab-item">
+    <div class="app600 mt-4">
+        <a href="{{ path('home') }}"><img src="{{ asset("assets/img/BerthieLogo.png") }}" class="logo" alt="Le Logo de Berthie"></a>
+        <a href="{{ path('cart') }}" class="panier">
+                <i class="fas fa-shopping-cart"></i>
+        </a>
+    </div>    
+    <div id="navbar">
+        <div class="nav-ab-item text-center">
             <a href="https://www.instagram.com/atelier_berthie/" target="_blank">INSTA</a>
         </div>
-        <div class="nav-ab-item">
+        <div class="nav-ab-item text-center">
             <a href="{{ path('produits') }}">SHOP</a>
         </div>
-        <div class="nav-ab-item disp600">
-            <a href="{{ path('home') }}"><img src="{{ asset("assets/img/BerthieLogo.jpg") }}" class="logo" alt="Le Logo de Berthie"></a>
+        <div class="nav-ab-item text-center disp600">
+            <a href="{{ path('home') }}"><img src="{{ asset("assets/img/BerthieLogo.png") }}" class="logo" alt="Le Logo de Berthie"></a>
         </div>
-        <div class="nav-ab-item">
+        <div class="nav-ab-item text-center">
             <a href="{{ path('about') }}">ABOUT</a>
         </div>
         {% if app.user %}
-            <div class="nav-ab-item">
-                <a href="{{ path('account') }}">PROFIL</a>
-                <a href="{{ path('app_logout') }}"><i class="far fa-times-circle"></i></a>
+            <div class="nav-ab-item text-center">
+                <a href="{{ path('account') }}">YOU</a>
             </div>
         {% else %}
-            <div class="nav-ab-item">
-                <a href="{{ path('app_login') }}">COMPTE</a>
+            <div class="nav-ab-item text-center">
+                <a href="{{ path('app_login') }}">YOU</a>
             </div>
         {% endif %}
     </div>
-    <div class="col-1">
-        <a href="{{ path('cart') }}" class="panier">
+        <a href="{{ path('cart') }}" class="panier disp600">
             <i class="fas fa-shopping-cart"></i>
         </a>
-    </div>
-</div>
-
