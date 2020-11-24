@@ -47,9 +47,28 @@ a, a:hover {
 /* AFFICHAGE HOME */
 
 /* AFFICHAGE SHOP */
-
-.produit-item {
+.produit-item-image {
     display: block;
+    width: 100%;
+    height: 100%;
+}
+.produit-item-description {
+    position:absolute;
+    text-align:center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    top:0;
+    opacity: 0;
+}
+.produit-item-image:hover .produit-item-description {
+    transition: linear 0.3s;
+    opacity: 1;
+}
+.produit-item-description-texte {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
 }
@@ -57,18 +76,6 @@ a, a:hover {
     width: 100%;
     height: 100%;
 }
-/*.produit-item {
-    margin-top: 20px;
-}
- .produit-item .produit-soustitre{
-    display: block;
-    margin-bottom: 10px;
-}
-.produit-item .produit-prix{
-    font-size: 14px;
-    font-weight: bold;
-} */
-
 
 /* AFFICHAGE CART */
 .custom-minus-plus a, .custom-minus-plus a:hover{

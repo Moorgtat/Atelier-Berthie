@@ -1,22 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Shop{% endblock %}
+{% block title %}Shop
+{% endblock %}
 
 {% block body %}
-<div class="container-fluid mb-5">
-        <div class="row">
-        {% for i in 0..4 %}
-           {% for produit in produits %}
-                    <div class="col-6 col-md-3 col-lg-2 pl-0 pr-0">
-                        <div class="produit-item text-center">
-                            <a href="{{ path('produit', {'slug': produit.slug}) }}"><img src="/uploads/{{ produit.couverture}}" class="img-shop" alt=""></a>
-                            {# <h5><a href="{{ path('produit', {'slug': produit.slug}) }}">{{ produit.titre }}</a></h5>
-                            <span class="produit-soustitre">{{ produit.soustitre }}</span>
-                            <small class="produit-prix">{{ (produit.prix / 100) | number_format(2) }} &euro;</small> #}
-                        </div>
-                    </div>
-            {% endfor %}
-        {% endfor %}    
-        </div>
-</div>
+	<div class="container-fluid mb-5">
+		<div class="row">
+			{% for i in 0..4 %}
+				{% for produit in produits %}
+					<div class="col-6 col-md-3 col-lg-2 pl-0 pr-0">
+						<div class="produit-item-image">
+							<a href="{{ path('produit', {'slug': produit.slug}) }}">
+								<img src="/uploads/{{ produit.couverture}}" class="img-shop" alt="">
+								<div class="produit-item-description" style="background-color:{{ couleur[random(0,1)] }}">
+									<div class="produit-item-description-texte">
+										<div>
+											<span><b>{{ produit.titre }}</b></span><br>
+											<span><i>{{ produit.soustitre}}</i></span><br>
+											<small>{{ (produit.prix / 100) | number_format(2) }}
+												&euro;</small>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				{% endfor %}
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}
+

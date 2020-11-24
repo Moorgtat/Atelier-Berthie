@@ -28,10 +28,13 @@ class ProduitController extends AbstractController
         //     $produits = $repo->findAll();
         // }
 
+        $couleur = ["#EB9583", "#584E71"];
+
         $produits = $repo->findAll();
 
         return $this->render('produit/shop.html.twig', [
-            'produits' => $produits
+            'produits' => $produits,
+            'couleur' => $couleur
             // 'form' => $form->createView()
         ]);
     }
