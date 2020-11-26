@@ -25,7 +25,7 @@
             <b>Recapitulatif de ma commande:</b>
             {% set total = null %}
             {% for produit in cart %}
-                <div class="row">
+                <div class="row mt-2">
                     <div class="col-2">
                         <img height="75px" src="/uploads/{{ produit.produit.couverture}}" alt="{{ produit.produit.titre }}">
                     </div>
@@ -69,7 +69,7 @@
     </div>
     
     <hr>
-    <a id="checkout-button" class="btn btn-lg btn-block btn-info">Valider ma commande</a>
+    <button id="checkout-button" class="btn btn-lg btn-block btn-dark">Valider ma commande</button>
 </div>
 {% endblock %}
 

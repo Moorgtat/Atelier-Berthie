@@ -35,7 +35,7 @@ class CommandeType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider mes options',
                 'attr' => [
-                    'class' => 'btn btn-info'
+                    'class' => 'btn btn-dark'
                 ]
             ])
         ;

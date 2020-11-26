@@ -14,7 +14,7 @@
                 You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
             </div>
         {% endif %}
-        <h1 class="h2 mb-3 font-weight-normal">Merci de vous connecter</h1>
+        <h1 class="h1">Se connecter</h1>
         <h4><small>Première connexion? N'oubliez pas d'activer votre compte grace à l'email que vous avez reçu.</small></h4>
         <br>
         <label for="inputEmail">Votre adresse email</label>
@@ -38,12 +38,12 @@
             </div>
         #}
 
-        <button class="btn btn-md btn-primary" type="submit">
-            Se connecter
+        <button class="btn btn-md btn-dark" type="submit" style="width: 80px;">
+            Valider
         </button>
     </form>
-    <br>
-    <p><a href="{{ path('reset_password') }}">J'ai oublié mon mot de passe.</a><br>
-    Ou souhaitez-vous <a href="{{ path('register') }}">créer un compte</a>?</p>
+    <hr>
+    <p>J'ai oublié <a href="{{ path('reset_password') }}" class="custom-link">mon mot de passe</a>.<br>
+    Ou souhaitez-vous <a href="{{ path('register') }}" class="custom-link">créer un compte</a>?</p>
 </div>
 {% endblock %}

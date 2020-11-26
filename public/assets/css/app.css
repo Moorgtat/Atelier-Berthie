@@ -6,11 +6,49 @@ html {
 body {
     padding: 0;
     margin: 0;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'Italianno', cursive;
 }
 
 a, a:hover {
     text-decoration: none;
     color: black;
+}
+.custom-link {
+    color: #393e46; 
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(2.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid;
+    border-color:  #393e46;
+    outline: 0;
+    box-shadow: none;
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 .disp600 {
@@ -44,7 +82,15 @@ a, a:hover {
     right: 30px;
 }
 
+/* AFFICHAGE FOOTER */
+
 /* AFFICHAGE HOME */
+
+/* AFFICHAGE ABOUT */
+.about {
+    font-family: 'Italianno', cursive;
+    font-size: 1.8rem;
+}
 
 /* AFFICHAGE SHOP */
 .produit-item-image {
@@ -66,6 +112,7 @@ a, a:hover {
     opacity: 1;
 }
 .produit-item-description-texte {
+    font-family: 'Open Sans Condensed', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;

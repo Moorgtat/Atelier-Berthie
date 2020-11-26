@@ -28,7 +28,7 @@ class ProduitController extends AbstractController
         //     $produits = $repo->findAll();
         // }
 
-        $couleur = ["#EB9583", "#584E71"];
+        $couleur = ["#EB9583", "#584E71", "#D35D6E", "#F8D49D", "#16697A", "#EC5858", "#595B83", "#8DB596", "#734046", "#394867", "#14274E"];
 
         $produits = $repo->findAll();
 

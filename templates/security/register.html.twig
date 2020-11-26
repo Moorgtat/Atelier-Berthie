@@ -4,9 +4,9 @@
 
 {% block body %}
 <div class="container mt-5">
-<h1> Inscription </h1>
-<a href="{{ path('app_login')}}">Retour à l'écran de connexion<a>
-<hr>
+<h1>Inscription</h1>
 {{ form(form) }}
+<hr>
+<a href="{{ path('app_login')}}" class="custom-link">Retour à l'écran de connexion<a>
 </div>
 {% endblock %}

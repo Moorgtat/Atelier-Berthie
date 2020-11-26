@@ -7,10 +7,13 @@
     <meta name="author" content="Atelier Berthie">
     <title>Atelier Berthie - {% block title %}{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico"/>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway&family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+        <!-- App font CSS -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Italianno&family=Niconne&family=Open+Sans+Condensed:wght@300&family=Roboto:wght@400;700&display=swap" rel="stylesheet">    <link href="https://fonts.googleapis.com/css2?family=Raleway&family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
         <!-- App core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <link  rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
     {% block javascript %}
     {% endblock %}
 </head>
