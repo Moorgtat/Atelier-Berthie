@@ -4,12 +4,13 @@
 
 {% block body %}
 <div class="container mt-5">
-<h1>Mon compte  <small style="font-size: 15px;"><a href="{{ path('app_logout') }}">(Déconnexion)</a></small></h1>
+<div class="text-right"><small><a href="{{ path('app_logout') }}" class="custom-link">Déconnexion</a></small></div>
+<h1>Mon compte</h1>
 <p>Bienvenue {{ app.user.firstname }} sur votre compte. Cet espace vous permets de gérer vos informations personelles.</p>
 <hr>
 <a href="{{ path('account_commande') }}">Mes Commandes</a><br>
-<a href="{{ path('adresse') }}">Gérer mes adresses.</a><br>
-<a href="{{ path('account_password') }}">Modifier mon mot de passe.</a><br>
+<a href="{{ path('adresse') }}">Gérer mes adresses</a><br>
+<a href="{{ path('account_password') }}">Modifier mon mot de passe</a><br>
 <hr>
 </div>
 {% endblock %}

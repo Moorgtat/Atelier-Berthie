@@ -6,8 +6,6 @@
 <div class="container mt-5">
 <h1>Mes Commandes</h1>
 <p> Vous allez pouvoir gérer toutes vos commandes dans cet espace.</p>
-<a href="{{ path('account') }}">Retour</a>
-<hr>
 {% if commandes | length == 0 %}
     <p>Vous n'avez pas encore effectué de commande.</p>
 {% else %}
@@ -49,5 +47,9 @@
   </tbody>
 </table>
 {% endif %}
+<hr>
+  <div class="text-right mr-4">
+    <a href="{{ path('account') }}" class="custom-link">Retour</a>
+  </div>
 </div>
 {% endblock %}

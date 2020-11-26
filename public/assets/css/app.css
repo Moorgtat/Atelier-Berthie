@@ -6,7 +6,7 @@ html {
 body {
     padding: 0;
     margin: 0;
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Ubuntu', 'Open Sans Condensed', sans-serif;
 }
 
 h1, h2, h3 {
@@ -23,6 +23,25 @@ a, a:hover {
     font-weight: 700;
 }
 
+.custom-link-two {
+    color: white; 
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.btn-custom {
+    font-family: 'Open Sans Condensed', sans-serif;
+    padding: 13px;
+    border: 1px solid black;
+    font-weight: 700;
+    border-radius: 5px;
+    background-color: transparent;
+}
+.btn-custom:hover, .btn-custom:focus {
+    transition: all 0.5s;
+    background-color: rgba(160, 160, 160, 0.322);
+}
+
 .form-control {
     display: block;
     width: 100%;
@@ -34,14 +53,12 @@ a, a:hover {
     color: #495057;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border: 1px solid;
     border-color:  #393e46;
     outline: 0;
     box-shadow: none;
@@ -88,8 +105,9 @@ a, a:hover {
 
 /* AFFICHAGE ABOUT */
 .about {
-    font-family: 'Italianno', cursive;
-    font-size: 1.8rem;
+    font-family: 'Ubuntu', 'Italianno', 'cursive';
+    font-size: 1.2rem;
+    text-align: justify;
 }
 
 /* AFFICHAGE SHOP */

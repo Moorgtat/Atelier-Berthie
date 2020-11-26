@@ -5,16 +5,13 @@
 {% block body %}
 <div class="container mt-4">
     <h1> Ou et comment me livrer?</h1>
-    <p>Choissisez vos préférences avant de régler votre commande.</p>
+    <a href="{{ path('adresse_add')}}" class="custom-link">Ajouter une nouvelle adresse.</a>
     <hr>
     <div class="row">
         <div class="col">
             {% set formHtml %}
             {{ form_start(form, {action:path('commande_validation')}) }}
             {{ form_label(form.adresses, 'Choisissez votre adresse de livraison:')}}
-            <div class="mb-3" >
-            <a href="{{ path('adresse_add')}}">Ajouter une nouvelle adresse.</a>
-            <div>
             {{ form_end(form) }}
             {% endset %}
 

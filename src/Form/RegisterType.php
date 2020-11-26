@@ -19,19 +19,19 @@ class RegisterType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label' => 'Votre prénom',
+                'label' => 'Prénom',
                 'attr' => [
                     'placeholder' => 'Saisissez votre prénom...'
                 ]
             ])
             ->add('lastname', TextType::class, [
-                'label' => 'Votre nom',
+                'label' => 'Nom',
                 'attr' => [
                     'placeholder' => 'Saisissez votre nom...'
                 ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Votre email',
+                'label' => 'Email',
                 'attr' => [
                     'placeholder' => 'Saisissez votre adresse email...'
                 ]
@@ -40,17 +40,17 @@ class RegisterType extends AbstractType
                 'type' => PasswordType::class,
                 'invalid_message' => "Votre mot de passe et le mot de passe de confirmation doivent être identique.",
                 'required' => true,
-                'first_options' => ['label' => 'Votre mot de passe', 'attr' => [
+                'first_options' => ['label' => 'Mot de passe', 'attr' => [
                     'placeholder' => 'Saisissez votre mot de passe...'
                     ]
                 ],
-                'second_options' => [ 'label' => 'Confirmez votre mot de passe', 'attr' => [
-                    'placeholder' => 'Saisissez votre mot de passe de confirmation...'
+                'second_options' => [ 'label' => 'Mot de passe de confirmation', 'attr' => [
+                    'placeholder' => 'Confirmez votre mot de passe...'
                     ]
                 ]
             ])
             ->add('phone', TelType::class, [
-                'label' => 'Votre numéro de téléphone',
+                'label' => 'Téléphone',
                 'attr' => [
                     'placeholder' => 'Saisissez votre numéro de téléphone...'
                 ]
@@ -58,7 +58,7 @@ class RegisterType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => "S'inscrire",
                 'attr' => [
-                    'class' => 'btn btn-dark'
+                    'class' => 'btn btn-lg btn-dark custom-link-two'
                 ]
             ])
         ;

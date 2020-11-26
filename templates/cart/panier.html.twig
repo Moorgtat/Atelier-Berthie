@@ -40,15 +40,15 @@
     {% endfor %}  
     </tbody>
     </table>
-<hr>
-<div class="text-center">
-<b>Total de mon panier:</b> {{ (total / 100) | number_format(2) }} &euro;
-</div>
-<hr>
-<div class="text-right">
-<a href="{{ path('produits') }}"><b>Poursuivre mes achats</b></a>  &nbsp &nbsp 
-<a href="{{ path('commande_livraison') }}" class="btn btn-md btn-dark">Valider mon panier</a>
-</div>
+    <hr>
+    <div class="text-right">
+    <b>Total de mon panier:</b> {{ (total / 100) | number_format(2) }} &euro;
+    </div>
+    <hr>
+    <div class="text-right">
+    <a href="{{ path('produits') }}" class="btn btn-lg btn-dark custom-link-two">Poursuivre mes achats</a>
+    <a href="{{ path('commande_livraison') }}" class="btn btn-lg btn-dark custom-link-two">Choisir ma livraison</a>
+    </div>
 {% else %}
 <hr>
 <h4> Votre panier est vide. </h4>
