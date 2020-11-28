@@ -17,6 +17,15 @@ a, a:hover {
     text-decoration: none;
     color: black;
 }
+
+.custom-font {
+    font-family: 'Ubuntu', 'Open Sans Condensed', sans-serif;
+}
+
+.reenie {
+    font-family: 'Reenie Beanie', cursive;
+}
+
 .custom-link {
     color: #393e46; 
     font-size: 1.1rem;
@@ -95,8 +104,10 @@ a, a:hover {
 }
 .panier {
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 15px;
+    right: 5vw;
+    display: flex;
+    flex-direction: row;
 }
 
 /* AFFICHAGE FOOTER */
@@ -148,7 +159,15 @@ a, a:hover {
     color: grey;
 }
 
-@media (max-width: 600px) {
+/* AFFICHAGE ACCOUNT */
+.account-item {
+    border-radius: 15px;
+    margin: 4px;
+    padding: 60px;
+    background-color: rgba(0, 139, 139, 0.452);
+}
+
+@media (max-width: 800px) {
     .disp600 {
         display: none;
     }
@@ -158,5 +177,14 @@ a, a:hover {
     }
     #navbar  {
     height: 60px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .panier {
+        top: 15px;
+        right: 15px;
     }
 }

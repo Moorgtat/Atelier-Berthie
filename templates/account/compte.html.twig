@@ -4,13 +4,28 @@
 
 {% block body %}
 <div class="container mt-5">
-<div class="text-right"><small><a href="{{ path('app_logout') }}" class="custom-link">Déconnexion</a></small></div>
+<div class="my-2">
 <h1>Mon compte</h1>
-<p>Bienvenue {{ app.user.firstname }} sur votre compte. Cet espace vous permets de gérer vos informations personelles.</p>
+<p>Bonjour {{ app.user.firstname }}, bienvenue sur votre compte. Cet espace vous permets de gérer vos informations personelles.</p>
 <hr>
-<a href="{{ path('account_commande') }}">Mes Commandes</a><br>
-<a href="{{ path('adresse') }}">Gérer mes adresses</a><br>
-<a href="{{ path('account_password') }}">Modifier mon mot de passe</a><br>
+</div>
+<div class="row account-item-container">
+    <div class="col-lg-4">
+        <div class="account-item text-center">
+                <i class="fa fa-shopping-basket"></i><a href="{{ path('account_commande') }}" class="custom-link ml-2" style="color: black;">Mes Commandes</a>
+        </div>
+    </div>
+    <div class="col-lg-4">
+            <div class="account-item text-center">
+                    <i class="fas fa-map-marker-alt"></i><a href="{{ path('adresse') }}" class="custom-link ml-2" style="color: black;">Mes adresses</a>
+            </div>
+    </div>
+    <div class="col-lg-4">
+            <div class="account-item text-center">
+                    <i class="fas fa-lock"></i><a href="{{ path('account_password') }}" class="custom-link ml-2" style="color: black;">Mot de passe</a>
+            </div>
+    </div>
+</div>
 <hr>
 </div>
 {% endblock %}

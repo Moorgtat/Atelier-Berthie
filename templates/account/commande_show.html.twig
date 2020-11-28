@@ -4,8 +4,8 @@
 
 {% block body %}
 <div class="container mt-5">
-    <h2>Ma Commande (<small>{{ commande.reference }}</small>)</h2>
-    <h4>Statut : <small>
+    <h2>Ma Commande - <small style="font-family: 'Open Sans Condensed', sans-serif; font-size: 18px;">({{ commande.reference }})</small></h2>
+    <h5>Statut : <small>
         {% if commande.state == 1 %}
             En attente de préparation
         {% elseif commande.state == 2 %}
@@ -18,7 +18,7 @@
             Le paiement de cette commande a échoué
         {% endif %}
         </small>
-    </h4>
+    </h5>
     <hr>
     <div class="row">
         <div class="col-md-5">
@@ -73,6 +73,8 @@
         </div>
     </div>
     <hr>
-        <a href="{{ path('account_commande') }}">Retour</a>
+         <div class="text-right mr-4">
+            <a href="{{ path('account') }}" class="custom-link">Retour</a>
+        </div>
 </div>
 {% endblock %}

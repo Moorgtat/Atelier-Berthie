@@ -1,32 +1,39 @@
-    <div class="app600 mt-4">
+    <div class="app600 mt-5">
         <a href="{{ path('home') }}"><img src="{{ asset("assets/img/BerthieLogo.png") }}" class="logo" alt="Le Logo de Berthie"></a>
-        <a href="{{ path('cart') }}" class="panier">
-                <i class="fas fa-shopping-cart"></i>
-        </a>
-    </div>    
-    <div id="navbar">
-        <div class="nav-ab-item text-center">
-            <a href="https://www.instagram.com/atelier_berthie/" target="_blank">INSTA</a>
-        </div>
-        <div class="nav-ab-item text-center">
-            <a href="{{ path('produits') }}">SHOP</a>
-        </div>
-        <div class="nav-ab-item text-center disp600">
-            <a href="{{ path('home') }}"><img src="{{ asset("assets/img/BerthieLogo.png") }}" class="logo" alt="Le Logo de Berthie"></a>
-        </div>
-        <div class="nav-ab-item text-center">
-            <a href="{{ path('about') }}">ABOUT</a>
-        </div>
-        {% if app.user %}
-            <div class="nav-ab-item text-center">
-                <a href="{{ path('account') }}">YOU</a>
-            </div>
-        {% else %}
-            <div class="nav-ab-item text-center">
-                <a href="{{ path('app_login') }}">YOU</a>
-            </div>
-        {% endif %}
     </div>
-        <a href="{{ path('cart') }}" class="panier disp600">
-            <i class="fas fa-shopping-cart"></i>
-        </a>
+    <div class="container">
+        <div id="navbar">
+            <div class="nav-ab-item text-center disp600">
+                <a href="{{ path('home') }}"><img src="{{ asset("assets/img/BerthieLogo.png") }}" class="logo" alt="Le Logo de Berthie"></a>
+            </div>
+            <div class="nav-ab-item text-center">
+                <a href="https://www.instagram.com/atelier_berthie/" target="_blank">INSTA</a>
+            </div>
+            <div class="nav-ab-item text-center">
+                <a href="{{ path('produits') }}">SHOP</a>
+            </div>
+            <div class="nav-ab-item text-center">
+                <a href="{{ path('about') }}">ABOUT</a>
+            </div>
+        </div>
+    </div>  
+    <div class="panier">
+        {% if app.user %}
+        <div class="dropdown">
+            <a href="{{ path('app_login') }}" class="dropdown-toggle" id="accountDropdownLink"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
+                <a href="{{ path('account') }}" class="dropdown-item text-center"><small>Mon compte</small></a>
+                <a href="{{ path('app_logout') }}" class="dropdown-item text-center"><small>Se déconnecter</small></a>
+            </div>
+        </div>
+        {% else %}
+        <div>
+        <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
+        </div>
+        {% endif %}
+        <div class="ml-2">
+        <a href="{{ path('cart') }}"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+    </div>

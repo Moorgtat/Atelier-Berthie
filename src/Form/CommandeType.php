@@ -26,7 +26,7 @@ class CommandeType extends AbstractType
                 'expanded' => true
             ])
             ->add('transporteurs', EntityType::class, [
-                'label' => 'Choisissez votre transporteur:' ,
+                'label' => false,
                 'required' => true,
                 'class' => Transporteur::class,
                 'multiple' => false,
@@ -35,7 +35,7 @@ class CommandeType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider mes options',
                 'attr' => [
-                    'class' => 'btn btn-dark'
+                    'class' => 'btn btn-lg btn-dark custom-link-two mt-5'
                 ]
             ])
         ;
