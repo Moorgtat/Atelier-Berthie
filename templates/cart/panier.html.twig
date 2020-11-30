@@ -3,7 +3,7 @@
 {% block title %}Mon panier{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
 <h1>Mon panier</h1>
     {% if cart | length > 0 %}
     <table class="table mt-3">
@@ -46,8 +46,8 @@
     </div>
     <hr>
     <div class="text-right">
-    <a href="{{ path('produits') }}" class="btn btn-lg btn-dark custom-link-two">Poursuivre mes achats</a>
-    <a href="{{ path('commande_livraison') }}" class="btn btn-lg btn-dark custom-link-two">Choisir ma livraison</a>
+    <a href="{{ path('produits') }}" class="custom-link">Poursuivre mes achats</a>
+    <a href="{{ path('commande_livraison') }}" class="btn btn-lg btn-dark custom-link-two ml-4">Choisir ma livraison <i class="fas fa-caret-right fa-lg" style="color: white; padding-top: 3px; margin-left: 5px;"></i></a>
     </div>
 {% else %}
 <hr>

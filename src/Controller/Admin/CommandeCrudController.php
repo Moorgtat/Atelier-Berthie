@@ -120,8 +120,8 @@ class CommandeCrudController extends AbstractCrudController
             TextEditorField::new('livraison', 'Adresse de livraison')->onlyOnDetail(),
             TextField::new('suivi', 'Numéro de suivi'),
             MoneyField::new('total', 'Total')->setCurrency('EUR')->setFormTypeOptions(['mapped' => false, 'required' => false]),
-            TextField::new('transporteurTitre', 'Transporteur'),
             MoneyField::new('transporteurPrix', 'Frais de port')->setCurrency('EUR'),
+            TextField::new('transporteurTitre', 'Transporteur'),
             ChoiceField::new('state')->setChoices([
                 'Commande non confirmée' => 0,
                 'Commande à traiter' => 1,

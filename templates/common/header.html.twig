@@ -19,7 +19,7 @@
     </div>  
     <div class="panier">
         {% if app.user %}
-        <div class="dropdown">
+        <div class="dropdown" style="padding: 10px;">
             <a href="{{ path('app_login') }}" class="dropdown-toggle" id="accountDropdownLink"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user"></i>
             </a>
@@ -29,11 +29,11 @@
             </div>
         </div>
         {% else %}
-        <div>
+        <div style="padding: 10px;">
         <a href="{{ path('app_login') }}"><i class="fas fa-user"></i></a>
         </div>
         {% endif %}
-        <div class="ml-2">
-        <a href="{{ path('cart') }}"><i class="fas fa-shopping-cart"></i></a>
+        <div style="padding: 8px;">
+        <a href="{{ path('cart') }}"><img src="{{ asset("assets/img/bag-16.png") }}"></a>
         </div>
     </div>

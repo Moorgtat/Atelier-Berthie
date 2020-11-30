@@ -8,6 +8,12 @@ body {
     margin: 0;
     font-family: 'Ubuntu', 'Open Sans Condensed', sans-serif;
 }
+.mw600{
+    max-width: 600px;
+}
+.page-top {
+    min-height: 91vh;
+}
 
 h1, h2, h3 {
     font-family: 'Italianno', cursive;
@@ -111,6 +117,13 @@ a, a:hover {
 }
 
 /* AFFICHAGE FOOTER */
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 1.5rem;
+}
 
 /* AFFICHAGE HOME */
 

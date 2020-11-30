@@ -5,31 +5,30 @@
 {% block body %}
 <div class="container">
     <div class="row mt-5">
-        <div class="col-md-5 text-center">
+        <div class="col-md-5 pl-0 text-center">
                 <img src="/uploads/{{ produit.couverture}}" class="img-fluid" alt="{{ produit.titre }}">
         </div>
-        <div class="col-md-7 my-auto">
-                <h1>{{ produit.titre }}</h1>
-                <p>{{ produit.soustitre }}</p>
-                <small>{{ (produit.prix / 100) | number_format(2) }} &euro;</small>
+        <div class="col-md-7 my-auto" style="padding: 25px;">
+                <h1 class="text-center">{{ produit.titre }}</h1>
+                <p class="text-center">{{ produit.soustitre }}</p>
+                <p><small>{{ (produit.prix / 100) | number_format(2) }} &euro;</small></p>
                 <hr>
-                <p>{{ produit.description }}<p> 
-                <a href="{{ path('add_to_cart', {'id': produit.id}) }}" class="btn btn-md btn-dark">Ajouter au panier</a>            
+                <p>{{ produit.description }}<p>
+                <div class="mt-5 text-right">
+                <a href="{{ path('add_to_cart', {'id': produit.id}) }}" class="custom-link">Ajouter au panier</a>            
+                </div>
         </div>
     </div>
-    {# <hr>
-    <h3>Nos meilleurs Ventes!</h3>
-    <div class="row mb-5">
-           {% for produit in produits %}
-                    <div class="col-md-3">
-                        <div class="produit-item text-center">
-                            <a href="{{ path('produit', {'slug': produit.slug}) }}"><img src="/uploads/{{ produit.couverture}}" class="img-fluid" alt=""></a>
-                            <h5><a href="{{ path('produit', {'slug': produit.slug}) }}">{{ produit.titre }}</a></h5>
-                            <span class="produit-soustitre">{{ produit.soustitre }}</span>
-                            <small class="produit-prix">{{ (produit.prix / 100) | number_format(2) }} &euro;</small>
-                        </div>
-                    </div>
-            {% endfor %}
-    </div> #}
+    <div class="row mt-1 mb-5">
+    <div class="col col-md-4 pl-0 pr-1">
+         <img src="/uploads/{{ produit.image1}}" class="img-fluid" alt="{{ produit.titre }}">
+    </div>
+    <div class="col col-md-4 pl-0 pr-1">
+        <img src="/uploads/{{ produit.image2}}" class="img-fluid" alt="{{ produit.titre }}">
+    </div>
+    <div class="col col-md-4 pl-0 pr-1">
+        <img src="/uploads/{{ produit.image3}}" class="img-fluid" alt="{{ produit.titre }}">
+    </div>
+    </div>
 </div>      
 {% endblock %}

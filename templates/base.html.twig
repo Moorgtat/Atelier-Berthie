@@ -21,6 +21,7 @@
     {% endblock %}
 </head>
 <body>
+<div class="page-top">
     {{ include('common/header.html.twig') }}
     {% for message in app.flashes('success') %}
             <div class="alert alert-info text-center">
@@ -34,6 +35,7 @@
     {% endfor %}        
     {% block body %}
     {% endblock %}
+ </div>   
     {{ include('common/footer.html.twig') }}
 </body>
 {% block script %}

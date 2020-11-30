@@ -32,12 +32,6 @@ class CommandeType extends AbstractType
                 'multiple' => false,
                 'expanded' => true
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Valider mes options',
-                'attr' => [
-                    'class' => 'btn btn-lg btn-dark custom-link-two mt-5'
-                ]
-            ])
         ;
     }
 

@@ -1,80 +1,120 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ma commande - {{ commande.reference }}{% endblock %}
+{% block title %}Ma commande -
+	{{ commande.reference }}
+{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <h2>Ma Commande - <small style="font-family: 'Open Sans Condensed', sans-serif; font-size: 18px;">({{ commande.reference }})</small></h2>
-    <h5>Statut : <small>
-        {% if commande.state == 1 %}
-            En attente de préparation
-        {% elseif commande.state == 2 %}
-            En cours de préparation
-        {% elseif commande.state == 3 and commande.transporteurTitre == "Colissimo" %}
-            Commande envoyée
-        {% elseif commande.state == 3 and commande.transporteurTitre == "Retrait Magasin" %}
-            Commande retirée en magasin    
-        {% elseif commande.state == 5 %}
-            Le paiement de cette commande a échoué
-        {% endif %}
-        </small>
-    </h5>
-    <hr>
-    <div class="row">
-        <div class="col-md-5">
-    <strong>Commande passée le :</strong> <small>{{ commande.createdAt | date('d/m/Y') }}</small> <br>
-    <strong>Reference :</strong> <small>{{ commande.reference }}</small> <br>
-    <strong>Transporteur choisi :</strong> {{ commande.transporteurTitre }} <br>
-    {% if commande.suivi %}
-    <strong>Numero de suivi :</strong> {{ commande.suivi }} - <a href="https://www.laposte.fr/outils/suivre-vos-envois" target="_blank">Suivre votre livraison</a>
-    {% endif %}
-        </div>
-        <div class="col-md-7">
-        <b>Recapitulatif de ma commande:</b>
-            {% set total = null %}
-            {% for produit in commande.commandeDetails %}
-                <div class="row">
-                    <div class="col-8 my-auto">
-                        {{ produit.produit }}
-                        <small>x {{ produit.quantite}}</small>
-                    </div>
-                    <div class="col-2 my-auto">
-                        {{ ((produit.prix * produit.quantite) / 100) | number_format(2) }} &euro;
-                    </div>
-                </div>
-            {% set total = total + (produit.prix * produit.quantite) %}
-            {% endfor %}
-        </div>
-    </div>    
-    <hr>
-<div class="row">
-        <div class="col-md-8">
-            <strong>Mon adresse de livraison:</strong><br>
-            {{ commande.livraison | raw }}
-        </div>
-        <div class="col-md-4">
-            <table>
-                <tr>
-                    <td><strong>Total du panier: </strong></td>
-                    <td> &nbsp; </td>
-                    <td>{{ (total / 100) | number_format(2) }} &euro;</td>
-                </tr>
-                <tr>
-                    <td><strong>Livraison: </strong></td>
-                    <td> &nbsp; </td>
-                    <td>{{ (commande.transporteurPrix / 100) | number_format(2) }} &euro;</td>
-                </tr>
-                <tr>
-                    <td><strong>Total de ma commande: </strong></td>
-                    <td> &nbsp; </td>
-                    <td>{{ ((total / 100) + (commande.transporteurPrix / 100)) | number_format(2) }} &euro;</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <hr>
-         <div class="text-right mr-4">
-            <a href="{{ path('account') }}" class="custom-link">Retour</a>
-        </div>
-</div>
+	<div class="container mt-5">
+		<h2>Ma Commande -
+			<small style="font-family: 'Open Sans Condensed', sans-serif; font-size: 18px;">({{ commande.reference }})</small>
+		</h2>
+		<h5>Statut :
+			<small>
+				{% if commande.state == 1 %}
+					En attente de préparation
+				{% elseif commande.state == 2 %}
+					En cours de préparation
+				{% elseif commande.state == 3 and commande.transporteurTitre == "Colissimo" %}
+					Commande envoyée
+				{% elseif commande.state == 3 and commande.transporteurTitre == "Retrait Magasin" %}
+					Commande retirée en magasin
+				{% elseif commande.state == 5 %}
+					Le paiement de cette commande a échoué
+				{% endif %}
+			</small>
+		</h5>
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<strong>Commande passée le :</strong>
+				<small>{{ commande.createdAt | date('d/m/Y') }}</small>
+				<br>
+				<strong>Reference :</strong>
+				<small>{{ commande.reference }}</small>
+				<br>
+				<strong>Transporteur choisi :</strong>
+				{{ commande.transporteurTitre }}
+				<br>
+				{% if commande.suivi %}
+					<strong>Numero de suivi :</strong>
+					{{ commande.suivi }}
+					<br>
+					<p>
+						<small>Utilisez votre numéro de suivi pour suivre votre colis grace au lien çi dessous:</small>
+						<a href="https://www.laposte.fr/outils/suivre-vos-envois" class="btn btn-outline-dark mt-2" target="_blank">
+							<strong>Suivre ma livraison</strong>
+						</a>
+					</p>
+				{% endif %}
+			</div>
+			<div class="col-md-6">
+				<b>Recapitulatif de ma commande:</b>
+				{% set total = null %}
+				{% for produit in commande.commandeDetails %}
+					<div class="row">
+						<div class="col-8 my-auto">
+							{{ produit.produit }}
+							<small>x
+								{{ produit.quantite}}</small>
+						</div>
+						<div class="col-2 my-auto">
+							{{ ((produit.prix * produit.quantite) / 100) | number_format(2) }}
+							&euro;
+						</div>
+					</div>
+					{% set total = total + (produit.prix * produit.quantite) %}
+				{% endfor %}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-8">
+				<strong>Mon adresse de livraison:</strong><br>
+				{{ commande.livraison | raw }}
+			</div>
+			<div class="col-md-4">
+				<table>
+					<tr>
+						<td>
+							<strong>Total du panier:
+							</strong>
+						</td>
+						<td>
+							&nbsp;
+						</td>
+						<td>{{ (total / 100) | number_format(2) }}
+							&euro;</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>Livraison:
+							</strong>
+						</td>
+						<td>
+							&nbsp;
+						</td>
+						<td>{{ (commande.transporteurPrix / 100) | number_format(2) }}
+							&euro;</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>Total de ma commande:
+							</strong>
+						</td>
+						<td>
+							&nbsp;
+						</td>
+						<td>{{ ((total / 100) + (commande.transporteurPrix / 100)) | number_format(2) }}
+							&euro;</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<hr>
+		<div class="text-right mr-4">
+			<a href="{{ path('account') }}" class="custom-link">Retour</a>
+		</div>
+	</div>
 {% endblock %}
+

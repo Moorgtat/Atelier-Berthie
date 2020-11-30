@@ -7,25 +7,25 @@
 {% endblock %}
 
 {% block body %}
-<div class="container mt-5">
+<div class="container mt-5" style="margin-bottom: 60px;">
     <h1>Valider ma commande</h1>
-    <p>Récapitulatif de votre commande.</p>
+    <p>Récapitulatif de votre commande:</p>
     <hr>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3">
             <strong>Mon adresse de livraison:</strong><br>
             {{ livraison_content | raw }}
-            <hr>
+            <br> <br>
             <strong>Mon transporteur:</strong><br>
             {{ transporteur.titre }}<br>
             {{ transporteur.description }}<br>
             {{ (transporteur.prix / 100 )| number_format(2) }} €
         </div>
         <div class="col-md-8">
-            <b>Recapitulatif de ma commande:</b>
+            <b>List de mes produits:</b>
             {% set total = null %}
             {% for produit in cart %}
-                <div class="row mt-2">
+                <div class="row mt-3">
                     <div class="col-2">
                         <img height="75px" src="/uploads/{{ produit.produit.couverture}}" alt="{{ produit.produit.titre }}">
                     </div>
@@ -44,32 +44,37 @@
         </div>
     </div>
     <hr>
-    <div class="row">
-        <div class="col-8">
-        </div>
-        <div class="col-4">
+    <div class="row justify-content-end">
+        <div class="col-lg-4 col-md-6">
             <table>
                 <tr>
                     <td><strong>Total du panier: </strong></td>
-                    <td> &nbsp; </td>
-                    <td>{{ (total / 100) | number_format(2) }} &euro; <small>(Dont TVA: {{ (total / 100) * (20/100) | number_format(2) }} &euro;)</small></td>
+                    <td> &nbsp;&nbsp;&nbsp; </td>
+                    <td>{{ (total / 100) | number_format(2) }} &euro;</td>
+                </tr>
+                 <tr>
+                    <td><strong>Dont TVA:</strong></td>
+                    <td> &nbsp;&nbsp;&nbsp; </td>
+                    <td><small>{{ (total / 100) * (20/100) | number_format(2) }} &euro;</small></td>
                 </tr>
                 <tr>
                     <td><strong>Livraison: </strong></td>
-                    <td> &nbsp; </td>
+                    <td> &nbsp;&nbsp;&nbsp; </td>
                     <td>{{ (transporteur.prix / 100) | number_format(2) }} &euro;</td>
                 </tr>
                 <tr>
                     <td><strong>Total de ma commande: </strong></td>
-                    <td> &nbsp; </td>
-                    <td>{{ ((total / 100) + (transporteur.prix / 100)) | number_format(2) }} &euro; TCC</td>
+                    <td> &nbsp; &nbsp; &nbsp; </td>
+                    <td>{{ ((total / 100) + (transporteur.prix / 100)) | number_format(2) }} &euro;</td>
+                    <td>&nbsp;<small>TTC</small></td>
                 </tr>
             </table>
         </div>
     </div>
-    
     <hr>
-    <button id="checkout-button" class="btn btn-lg btn-block btn-dark">Valider ma commande</button>
+    <div class="text-right">
+        <button id="checkout-button" class="btn btn-block btn-lg btn-dark" style="padding: 20px;"><strong>Payer ma commande ({{ ((total / 100) + (transporteur.prix / 100)) | number_format(2) }} &euro; TTC)</strong></button>
+    </div>
 </div>
 {% endblock %}
 
