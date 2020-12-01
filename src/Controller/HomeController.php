@@ -7,6 +7,7 @@ use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints\Length;
 
 class HomeController extends AbstractController
 {
@@ -18,9 +19,16 @@ class HomeController extends AbstractController
         // $produits = $produitRepo->findByIsBest(true);
 
         $produits = $produitRepo->findAll();
+
+        $moitie = sizeof($produits) /2;
+        $l_produits = array_slice($produits, $moitie);
+
+        rsort($produits);
+        $f_produits = array_slice($produits, $moitie);
         
         return $this->render('home/home.html.twig', [
-            'produits' => $produits
+            'f_produits' => $f_produits,
+            'l_produits' => $l_produits
         ]);
     }
 

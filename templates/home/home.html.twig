@@ -26,15 +26,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="my-5 py-3">
-			<h2 class="reenie">
+	<div class="container text-justify">
+		<div class="mt-5 py-3">
+			<h4 class="custom-font">
 				Perspiciatis, aliquid quam ut error accusamus assumenda illo ad quis officiis commodi ab veniam velit est temporibus odio eveniet inventore esse architecto!Nisi sequi debitis possimus ratione quidem aspernatur perspiciatis.
-			</h2>
-			<div class="row">
-				{% for produit in produits %}
-                <h1>{{ produit.id }}</h1>
-					<div class="col-6 col-md-3 col-lg-2 pl-0 pr-0">
+			</h4>
+			<div class="row my-5">
+				{% for produit in f_produits %}
+					<div class="col-3">
 						<div class="produit-item-image">
 							<a href="{{ path('produit', {'slug': produit.slug}) }}">
 								<img src="/uploads/{{ produit.couverture}}" class="img-shop" alt="">
@@ -43,14 +42,28 @@
 					</div>
 				{% endfor %}
 			</div>
-			<h2 class="reenie">
+			<h4 class="custom-font">
 				Perspiciatis, aliquid quam ut error accusamus assumenda illo ad quis! Nisi sequi debitis possimus ratione quidem aspernatur perspiciatis totam distinctio itaque assumenda sunt id optio, laborum illum temporibus deleniti fugit nam veniam necessitatibus doloremque enim, hic maiores similique quia. Fugit.
-								                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-			</h2>
-
-			<h2 class="reenie">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit.
-			</h2>
+			</h4>
+			<div class="row my-5">
+				{% for produit in l_produits %}
+					<div class="col-3">
+						<div class="produit-item-image">
+							<a href="{{ path('produit', {'slug': produit.slug}) }}">
+								<img src="/uploads/{{ produit.couverture}}" class="img-shop" alt="">
+							</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<h4 class="custom-font">
+				Perspiciatis, aliquid quam ut error accusamus assumenda illo ad quis! Nisi sequi debitis possimus ratione quidem aspernatur perspiciatis totam distinctio itaque assumenda sunt id optio, laborum illum temporibus deleniti fugit nam veniam necessitatibus doloremque enim, hic maiores similique quia. Fugit.
+				Lorem ipsum dolor sit amet consectetur adipisicing elit.
+			</h4>
+            <div class="text-center">
+            	<img src="{{ asset('assets/img/b-logo-footer.jpg') }}" class="img-fluid" alt="" style="width: 300px;">
+            </div>
 		</div>
 
 	</div>

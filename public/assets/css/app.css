@@ -25,7 +25,7 @@ a, a:hover {
 }
 
 .custom-font {
-    font-family: 'Ubuntu', 'Open Sans Condensed', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .reenie {
@@ -96,11 +96,12 @@ a, a:hover {
     display: grid;
     height: 200px;
     grid-auto-flow: column;
-    grid-template-columns: 1fr, 1fr, 1fr, 1fr, 1fr;
+    grid-template-columns: 1fr, 1fr, 1fr, 1fr;
 }
 .nav-ab-item {
     font-family: 'Raleway', sans-serif;
     font-size: calc(1rem + 0.5vw);
+    width: 100%;
     display: grid;
     justify-self: center;
     align-items: center;
@@ -132,6 +133,8 @@ a, a:hover {
     font-family: 'Ubuntu', 'Italianno', 'cursive';
     font-size: 1.2rem;
     text-align: justify;
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
 /* AFFICHAGE SHOP */
@@ -143,14 +146,15 @@ a, a:hover {
 .produit-item-description {
     position:absolute;
     text-align:center;
-    width: 100%;
-    height: 100%;
+    width: 97.7%;
+    height: 97.7%;
     color: white;
-    top:0;
+    top: 3px;
+    left: 3px;
     opacity: 0;
 }
 .produit-item-image:hover .produit-item-description {
-    transition: linear 0.3s;
+    transition: ease 0.4s;
     opacity: 1;
 }
 .produit-item-description-texte {
@@ -162,6 +166,7 @@ a, a:hover {
     height: 100%;
 }
 .img-shop {
+    padding: 4px;
     width: 100%;
     height: 100%;
 }
@@ -180,7 +185,7 @@ a, a:hover {
     background-color: rgba(0, 139, 139, 0.452);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .disp600 {
         display: none;
     }
