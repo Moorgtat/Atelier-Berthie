@@ -3,12 +3,14 @@
 {% block title %}Ajouter une adresse{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
+<div class="container mw600 mt-5 mb-5">
 <h1>Ajouter une adresse</h1>
 <p>Avant de procéder à une commande, vous devez ajouter une adresse.</p>
 <hr>
 {{ form(form) }}
 <hr>
-<a href="{{ path('account') }}">Retourner à mon compte</a>
+  <div class="text-right mr-4">
+    <a href="{{ path('account') }}" class="custom-link">Retour</a>
+  </div>
 </div>
 {% endblock %}

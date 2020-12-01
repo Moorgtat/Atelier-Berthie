@@ -77,7 +77,10 @@ class AdresseType extends AbstractType
                 ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Valider'
+                'label' => 'Valider',
+                'attr' => [
+                    'class' => 'btn btn-lg btn-dark custom-link-two'
+                ]
             ])
         ;
     }

@@ -1,34 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ produit.titre }}{% endblock %}
+{% block title %}
+	{{ produit.titre }}
+{% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-md-5 pl-0 text-center">
-                <img src="/uploads/{{ produit.couverture}}" class="img-fluid" alt="{{ produit.titre }}">
-        </div>
-        <div class="col-md-7 my-auto" style="padding: 25px;">
-                <h1 class="text-center">{{ produit.titre }}</h1>
-                <p class="text-center">{{ produit.soustitre }}</p>
-                <p><small>{{ (produit.prix / 100) | number_format(2) }} &euro;</small></p>
-                <hr>
-                <p>{{ produit.description }}<p>
-                <div class="mt-5 text-right">
-                <a href="{{ path('add_to_cart', {'id': produit.id}) }}" class="custom-link">Ajouter au panier</a>            
-                </div>
-        </div>
-    </div>
-    <div class="row mt-1 mb-5">
-    <div class="col col-md-4 pl-0 pr-1">
-         <img src="/uploads/{{ produit.image1}}" class="img-fluid" alt="{{ produit.titre }}">
-    </div>
-    <div class="col col-md-4 pl-0 pr-1">
-        <img src="/uploads/{{ produit.image2}}" class="img-fluid" alt="{{ produit.titre }}">
-    </div>
-    <div class="col col-md-4 pl-0 pr-1">
-        <img src="/uploads/{{ produit.image3}}" class="img-fluid" alt="{{ produit.titre }}">
-    </div>
-    </div>
-</div>      
+	<div class="container">
+		<div class="row mt-3">
+			<div class="col-md-5 pl-0 text-center">
+				<img src="/uploads/{{ produit.couverture}}" class="img-fluid" alt="{{ produit.titre }}">
+			</div>
+			<div class="col-md-7 my-auto" style="padding: 25px;">
+				<h1 class="text-center" style="font-size: 3rem;">{{ produit.titre }}</h1>
+				<p class="text-center">{{ produit.soustitre }}</p>
+				<div class="text-right">
+					<strong>{{ (produit.prix / 100) | number_format(2) }}
+						&euro;</strong>
+				</div>
+				<hr>
+				<p>{{ produit.description }}</p>
+				<p>
+					<div class="mt-5 text-right">
+						<a href="{{ path('add_to_cart', {'id': produit.id}) }}" class="custom-link">Ajouter au panier</a>
+					</div>
+				</p>
+			</div>
+		</div>
+		<div class="row mt-1">
+			<div class="col col-md-4 pl-0 pr-1">
+				<img src="/uploads/{{ produit.image1}}" class="img-fluid" alt="{{ produit.titre }}">
+			</div>
+			<div class="col col-md-4 pl-0 pr-1">
+				<img src="/uploads/{{ produit.image2}}" class="img-fluid" alt="{{ produit.titre }}">
+			</div>
+			<div class="col col-md-4 pl-0 pr-1">
+				<img src="/uploads/{{ produit.image3}}" class="img-fluid" alt="{{ produit.titre }}">
+			</div>
+		</div>
+        <hr>
+	</div>
 {% endblock %}
+

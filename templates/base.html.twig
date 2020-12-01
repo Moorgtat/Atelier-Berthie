@@ -21,8 +21,8 @@
     {% endblock %}
 </head>
 <body>
-<div class="page-top">
     {{ include('common/header.html.twig') }}
+    <div class="page-top">
     {% for message in app.flashes('success') %}
             <div class="alert alert-info text-center">
                 {{ message }}

@@ -13,8 +13,6 @@
   <thead>
     <tr>
       <th scope="col">Passée le</th>
-      <th scope="col">Référence</th>
-      <th scope="col">Produits</th>
       <th scope="col">Statut</th>
       <th scope="col">Total</th>
       <th scope="col"></th>
@@ -25,8 +23,6 @@
   {% for commande in commandes %}
       <tr>
       <td>{{ commande.createdAt | date('d/m/Y' )}}</td>
-      <td>{{ commande.reference }}</td>
-      <td>{{ commande.commandeDetails | length }}</td>
       <td>
         {% if commande.state == 1 %}
           En attente de préparation
@@ -41,7 +37,7 @@
         {% endif %}
       </td>
       <td>{{ ((commande.transporteurPrix + commande.getTotal) / 100) | number_format(2) }} €</td>
-      <td class="text-right"><a href="{{ path('account_commande_show', {'reference' : commande.reference}) }}">Voir ma commande</a></td>
+      <td class="text-right"><a href="{{ path('account_commande_show', {'reference' : commande.reference}) }}"><i class="far fa-eye"></i></a></td>
      </tr>
     {% endfor %}
   </tbody>
