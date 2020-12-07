@@ -29,7 +29,7 @@
 	<div class="container text-justify">
 		<div class="mt-5 py-3">
 			<h4 class="custom-font">
-				Perspiciatis, aliquid quam ut error accusamus assumenda illo ad quis officiis commodi ab veniam velit est temporibus odio eveniet inventore esse architecto!Nisi sequi debitis possimus ratione quidem aspernatur perspiciatis.
+				Perspiciatis, aliquid quam ut <strong><a href="{{ path('produits') }}">SHOP</a></strong> accusamus assumenda illo ad quis officiis commodi ab veniam velit est temporibus odio eveniet inventore esse architecto!Nisi sequi debitis possimus ratione quidem aspernatur perspiciatis.
 			</h4>
 			<div class="row my-5">
 				{% for produit in f_produits %}
@@ -43,7 +43,7 @@
 				{% endfor %}
 			</div>
 			<h4 class="custom-font">
-				Perspiciatis, aliquid quam ut error accusamus assumenda illo ad quis! Nisi sequi debitis possimus ratione quidem aspernatur perspiciatis totam distinctio itaque assumenda sunt id optio, laborum illum temporibus deleniti fugit nam veniam necessitatibus doloremque enim, hic maiores similique quia. Fugit.
+				Perspiciatis, aliquid quam ut error accusamus assumenda illo ad quis! Nisi <strong><a href="https://www.instagram.com/atelier_berthie/" target="_blank">INSTA</a></strong> debitis possimus ratione quidem aspernatur perspiciatis totam distinctio itaque assumenda sunt id optio, laborum illum temporibus deleniti fugit nam veniam necessitatibus doloremque enim, hic maiores similique quia. Fugit.
 				Lorem ipsum dolor sit amet consectetur adipisicing elit.
 			</h4>
 			<div class="row my-5">
@@ -58,14 +58,32 @@
 				{% endfor %}
 			</div>
 			<h4 class="custom-font">
-				Perspiciatis, aliquid quam ut error accusamus assumenda illo ad quis! Nisi sequi debitis possimus ratione quidem aspernatur perspiciatis totam distinctio itaque assumenda sunt id optio, laborum illum temporibus deleniti fugit nam veniam necessitatibus doloremque enim, hic maiores similique quia. Fugit.
+				Perspiciatis, aliquid quam ut error accusamus <strong><a href="{{ path('about') }}">ABOUT</a></strong> illo ad quis! Nisi sequi debitis possimus ratione quidem aspernatur perspiciatis totam distinctio itaque assumenda sunt id optio, laborum illum temporibus deleniti fugit nam veniam necessitatibus doloremque enim, hic maiores similique quia. Fugit.
 				Lorem ipsum dolor sit amet consectetur adipisicing elit.
 			</h4>
-            <div class="text-center">
-            	<img src="{{ asset('assets/img/b-logo-footer.jpg') }}" class="img-fluid" alt="" style="width: 300px;">
-            </div>
 		</div>
-
+	</div>
+	<div class="container-fluid my-5">
+		<div class="row">
+			<div class="col-4 pl-0 pr-2">
+				<img src="{{ asset('assets/img/mck-ecrire.jpg') }}" class="img-fluid" alt="">
+			</div>
+			<div class="col-4 pl-1 pr-1 ">
+				<img src="{{ asset('assets/img/mck-meme.png') }}" class="img-fluid" alt="">
+			</div>
+			<div class="col-4 pl-2 pr-0">
+				<img src="{{ asset('assets/img/mck-fleurs.jpg') }}" class="img-fluid" alt="">
+			</div>
+		</div>
+	</div>
+	<div class="container text-center mb-4">
+		<div>
+			<h2 class="py-5 mx-5">
+				<strong class="reenie">
+					Le version du site n'est pas definitive et sert de demo temporaire au forfait Affair Plus du <a href="https://www.studio-dev.fr" target="_blank" style="font-size: 2.5rem; color: #fed136;"><strong>Studio Dev</strong></a> !
+				</strong>
+			</h2>
+		</div>
 	</div>
 {% endblock %}
 

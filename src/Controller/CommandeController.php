@@ -116,7 +116,7 @@ class CommandeController extends AbstractController
         }
 
         foreach ($commande->getCommandeDetails()->getValues() as $produit) {
-            $produit_object = $produitRepo->findOneByTitre($produit->getProduit());
+            $produit_object = $produitRepo->findOneByTitre($produit->getProduit());           
             $liste_produit_stripe[] = [
                 'price_data' => [
                     'currency' => 'eur',
@@ -130,17 +130,17 @@ class CommandeController extends AbstractController
             ];
         }
         
-        $liste_produit_stripe[] = [
-            'price_data' => [
-                'currency' => 'eur',
-                'unit_amount' => $commande->getTransporteurPrix(),
-                    'product_data' => [
-                        'name' => $commande->getTransporteurTitre(),
-                        'images' => [$YOUR_DOMAIN],
+            $liste_produit_stripe[] = [
+                'price_data' => [
+                    'currency' => 'eur',
+                    'unit_amount' => $commande->getTransporteurPrix(),
+                        'product_data' => [
+                            'name' => $commande->getTransporteurTitre(),
+                            'images' => [$YOUR_DOMAIN],
+                        ],
                     ],
-                ],
-            'quantity' => 1,
-        ];
+                'quantity' => 1,
+            ];
 
         Stripe::setApiKey('sk_test_51HlWG3GucqTraIY3sLTmaEBn253RapsttGz5sbEBh2w8SmA4QLyiudwT7ELRxGTs7YeuGmR6C8e3MTQgH6OlgzC000NZRNstat');
         
@@ -180,7 +180,7 @@ class CommandeController extends AbstractController
             $manager->flush();
 
             //Mailclient succes confirm
-            $content = "Bonjour".$commande->getUser()->getFirstname()."<br>Succes Commande ! Merci pour votre commande!<br>L'Atelier Berthie";
+            $content = "Bonjour".$commande->getUser()->getFirstname()."<br>Succes de votre commande test ! Merci pour votre participation à la beta du site !<br>L'Atelier Berthie";
             $mail = new Mail();
             $mail->send($this->getUser()->getEmail(), 
             $commande->getUser()->getFirstname(), 

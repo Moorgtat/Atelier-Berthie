@@ -1,57 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon panier{% endblock %}
+{% block title %}Mon panier
+{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-<h1>Mon panier</h1>
-    {% if cart | length > 0 %}
-    <table class="table mt-3">
-    <thead>
-        <tr>
-        <th scope="col">Produit</th>
-        <th scope="col">Description</th>
-        <th scope="col">Quantité</th>
-        <th scope="col">Prix</th>
-        <th scope="col">Total</th>
-        <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    {% set total = null %}
-    {% for produit in cart %}
-        <tr>
-            <th>
-                <img height="75px" src="/uploads/{{ produit.produit.couverture}}" alt="{{ produit.produit.titre }}">
-            </th>
-            <td>
-                {{ produit.produit.titre }}<br>
-                <small>{{ produit.produit.soustitre }}</small>
-            </td>
-            <td class="custom-minus-plus">
-                <a href="{{ path('decrease_to_cart', { id: produit.produit.id }) }}" class="mr-2"><i class="fas fa-minus-circle fa-sm"></i> </a>
-                x {{ produit.quantity }} 
-                <a href="{{ path('add_to_cart', { id: produit.produit.id }) }}" class="ml-2"> <i class="fas fa-plus-circle fa-sm"></i></a></td>
-            <td>{{ (produit.produit.prix / 100) | number_format(2) }} &euro;</td>
-            <td>{{ ((produit.produit.prix * produit.quantity) / 100) | number_format(2) }} &euro;</td>
-            <td><a href="{{ path('delete_to_cart', {'id' : produit.produit.id}) }}"><i class="far fa-trash-alt"></i></a></td>
-        </tr>
-        {% set total = total + (produit.produit.prix * produit.quantity) %}
-    {% endfor %}  
-    </tbody>
-    </table>
-    <hr>
-    <div class="text-right">
-    <b>Total de mon panier:</b> {{ (total / 100) | number_format(2) }} &euro;
-    </div>
-    <hr>
-    <div class="text-right">
-    <a href="{{ path('produits') }}" class="custom-link">Poursuivre mes achats</a>
-    <a href="{{ path('commande_livraison') }}" class="btn btn-lg btn-dark custom-link-two ml-4">Choisir ma livraison <i class="fas fa-caret-right fa-lg" style="color: white; padding-top: 3px; margin-left: 5px;"></i></a>
-    </div>
-{% else %}
-<hr>
-<h4> Votre panier est vide. </h4>
-{% endif %}
-</div> 
-{% endblock %}
+		<div class="container mt-5">
+			<h1>Mon panier</h1>
+			{% if cart | length > 0 %}
+				<table class="table mt-3">
+					<thead>
+						<tr>
+							<th scope="col">Produit</th>
+							<th scope="col">Description</th>
+							<th scope="col">Quantité</th>
+							<th scope="col">Prix</th>
+							<th scope="col">Total</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% set total = null %}
+						{% for produit in cart %}
+							<tr>
+								<th style="vertical-align: middle;">
+									<img height="75px" src="/uploads/{{ produit.produit.couverture}}" alt="{{ produit.produit.titre }}">
+								</th>
+								<td style="vertical-align: middle;">
+									{{ produit.produit.titre }}<br>
+									<small>{{ produit.produit.soustitre }}</small>
+								</td>
+								<td class="custom-minus-plus" style="vertical-align: middle;">
+									<a href="{{ path('decrease_to_cart', { id: produit.produit.id }) }}" class="mr-2">-</a>
+									x
+									{{ produit.quantity }}
+									<a href="{{ path('add_to_cart', { id: produit.produit.id }) }}" class="ml-2">+</a>
+								</td>
+								<td style="vertical-align: middle;">{{ (produit.produit.prix / 100) | number_format(2) }}
+									&euro;</td>
+								<td style="vertical-align: middle;">{{ ((produit.produit.prix * produit.quantity) / 100) | number_format(2) }}
+									&euro;</td>
+								<td style="vertical-align: middle;">
+									<a href="{{ path('delete_to_cart', {'id' : produit.produit.id}) }}">
+										<i class="far fa-trash-alt"></i>
+									</a>
+								</td>
+							</tr>
+							{% set total = total + (produit.produit.prix * produit.quantity) %}
+						{% endfor %}
+					</tbody>
+				</table>
+				<hr>
+				<div class="text-right">
+					<b>Total de mon panier:</b>
+					{{ (total / 100) | number_format(2) }}
+					&euro;
+				</div>
+				<hr>
+				<div class="text-right">
+					<a href="{{ path('produits') }}" class="custom-link">Poursuivre mes achats</a>
+					<a href="{{ path('commande_livraison') }}" class="btn btn-lg btn-dark custom-link-two ml-4">Choisir ma livraison
+						<i class="fas fa-caret-right fa-lg" style="color: white; padding-top: 3px; margin-left: 5px;"></i>
+					</a>
+				</div>
+			{% else %}
+				<hr>
+				<h5>
+					Votre panier est vide.
+				</h5>
+			{% endif %}
+		</div>
+	{% endblock %}
+

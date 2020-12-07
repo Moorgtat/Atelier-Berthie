@@ -45,7 +45,7 @@
     </div>
     <hr>
     <div class="row justify-content-end">
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6 my-3">
             <table>
                 <tr>
                     <td><strong>Total du panier: </strong></td>
@@ -71,10 +71,10 @@
             </table>
         </div>
     </div>
-    <hr>
-    <div class="text-right">
-        <button id="checkout-button" class="btn btn-block btn-lg btn-dark" style="padding: 20px;"><strong>Payer ma commande ({{ ((total / 100) + (transporteur.prix / 100)) | number_format(2) }} &euro; TTC)</strong></button>
+    <div class="text-center mt-4">
+        <button id="checkout-button" class="btn btn-lg btn-block btn-dark" style="padding: 20px; font-size: 1.2rem;"><strong>Payer ma commande ({{ ((total / 100) + (transporteur.prix / 100)) | number_format(2) }} &euro; TTC)</strong></button>
     </div>
+    <hr>
 </div>
 {% endblock %}
 
