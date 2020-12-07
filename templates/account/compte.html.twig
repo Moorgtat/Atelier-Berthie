@@ -1,31 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Compte{% endblock %}
+{% block title %}Compte
+{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-<div class="my-2">
-<h1>Mon compte</h1>
-<p>Bonjour {{ app.user.firstname }}, bienvenue sur votre compte. Cet espace vous permets de gérer vos informations personelles.</p>
-<hr>
-</div>
-<div class="row account-item-container">
-    <div class="col-lg-4">
-        <div class="account-item text-center">
-                <i class="fa fa-shopping-basket"></i><a href="{{ path('account_commande') }}" class="custom-link ml-2" style="color: black;">Mes Commandes</a>
-        </div>
-    </div>
-    <div class="col-lg-4">
-            <div class="account-item text-center">
-                    <i class="fas fa-map-marker-alt"></i><a href="{{ path('adresse') }}" class="custom-link ml-2" style="color: black;">Mes adresses</a>
-            </div>
-    </div>
-    <div class="col-lg-4">
-            <div class="account-item text-center">
-                    <i class="fas fa-lock"></i><a href="{{ path('account_password') }}" class="custom-link ml-2" style="color: black;">Mot de passe</a>
-            </div>
-    </div>
-</div>
-<hr>
-</div>
+	<div class="container mt-5">
+		<div class="my-2">
+			<h1>Mon compte</h1>
+			<p>Bonjour
+				{{ app.user.firstname }}, <br>
+                                Bienvenue sur votre compte!
+                                {% if is_granted('ROLE_ADMIN') %}
+			                En tant qu'administrateur, vous pouvez accéder au <a href="/admin" target="_blank" class="custom-link"><i class="fas fa-tools mx-1"></i>Panneau d'administration</a>.
+                                {% else %}
+                                         Cet espace vous permets de gérer vos informations personelles.
+                                {% endif %}        
+                        </p>
+			<hr>
+		</div>
+		<div class="row account-item-container">
+			<div class="col-lg-4">
+				<div class="account-item text-center">
+					<i class="fa fa-shopping-basket"></i>
+					<a href="{{ path('account_commande') }}" class="custom-link ml-2" style="color: black;">Mes Commandes</a>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="account-item text-center">
+					<i class="fas fa-map-marker-alt"></i>
+					<a href="{{ path('adresse') }}" class="custom-link ml-2" style="color: black;">Mes adresses</a>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="account-item text-center">
+					<i class="fas fa-lock"></i>
+					<a href="{{ path('account_password') }}" class="custom-link ml-2" style="color: black;">Mot de passe</a>
+				</div>
+			</div>
+		</div>
+		<hr>
+	</div>
 {% endblock %}
+

@@ -22,13 +22,29 @@ class ProduitCrudController extends AbstractCrudController
     {
         return [
             TextField::new('titre'),
-            TextField::new('soustitre'),
-            ImageField::new('couverture')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false]),
-            ImageField::new('image_1')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false])->setTextAlign('left'),
-            ImageField::new('image_2')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false])->setTextAlign('left'),
-            ImageField::new('image_3')->setBasePath('uploads/')->setFormTypeOptions(['mapped' => false, 'required' => false, 'trim' => true])->setTextAlign('left'),
+            TextField::new('soustitre', 'Sous Titre'),
+            ImageField::new('couverture')
+                ->setBasePath('uploads/')
+                ->setUploadDir('public/uploads')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false),
+            ImageField::new('image_1')
+                ->setBasePath('uploads/')
+                ->setUploadDir('public/uploads')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false),
+            ImageField::new('image_2')
+                ->setBasePath('uploads/')
+                ->setUploadDir('public/uploads')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false),
+            ImageField::new('image_3')
+                ->setBasePath('uploads/')
+                ->setUploadDir('public/uploads')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false),
             TextareaField::new('description'),
-            BooleanField::new('isBest'),
+            BooleanField::new('isBest', 'Mis en avant')->setTextAlign('center'),
             MoneyField::new('prix')->setCurrency('EUR'),
             AssociationField::new('categorie')->hideOnIndex()
         ];

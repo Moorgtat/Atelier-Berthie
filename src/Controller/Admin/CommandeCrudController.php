@@ -113,13 +113,13 @@ class CommandeCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('stringCreatedAt', 'Passée le'),
-            TextField::new('user.getFullName', 'Utilisateur'),
-            ArrayField::new('commandeDetails', 'Produits achetés')->setFormTypeOptions(['mapped' => false, 'required' => false])->hideOnIndex(),
+            IdField::new('id')->hideOnForm(),
+            TextField::new('stringCreatedAt', 'Passée le')->hideOnForm(),
+            TextField::new('user.getFullName', 'Utilisateur')->hideOnForm(),
+            ArrayField::new('commandeDetails', 'Produits achetés')->setFormTypeOptions(['mapped' => false, 'required' => false])->hideOnIndex()->hideOnForm(),
             TextEditorField::new('livraison', 'Adresse de livraison')->onlyOnDetail(),
             TextField::new('suivi', 'Numéro de suivi'),
-            MoneyField::new('total', 'Total')->setCurrency('EUR')->setFormTypeOptions(['mapped' => false, 'required' => false]),
+            MoneyField::new('total', 'Total panier')->setCurrency('EUR')->setFormTypeOptions(['mapped' => false, 'required' => false])->hideOnForm(),
             MoneyField::new('transporteurPrix', 'Frais de port')->setCurrency('EUR'),
             TextField::new('transporteurTitre', 'Transporteur'),
             ChoiceField::new('state')->setChoices([
