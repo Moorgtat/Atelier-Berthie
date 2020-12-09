@@ -42,9 +42,9 @@ class SecurityController extends AbstractController
                 $manager->persist($user);
                 $manager->flush();
 
-                $url = $this->generateUrl('confirm_account', [
-                    'token' => $user->getToken()
-                ]);
+                $token = $user->getToken();
+                $url = "http://127.0.0.1:8000/confirmer-mon-compte/".$token;
+
                 $content = "Bienvenue <strong>".$user->getFirstname()."</strong> à l'Atelier Berthie,<br>
                             Voici un lien pour confirmer ton inscription:<br>
                             <a href=".$url.">Activer mon compte</a><br>
@@ -136,9 +136,8 @@ class SecurityController extends AbstractController
                 $manager->persist($reset_password);
                 $manager->flush();
 
-                $url = $this->generateUrl('valid_reset_password', [
-                    'token' => $reset_password->getToken()
-                ]);
+                $token = $reset_password->getToken();
+                $url = "http://127.0.0.1:8000/mot-de-passe-oublie/".$token;
 
                 $content = "<strong>".$user->getFirstname()."</strong>,<br>
                             Ta demande de réinitialisation a été prise en compte. <br>

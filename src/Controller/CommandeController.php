@@ -105,7 +105,7 @@ class CommandeController extends AbstractController
      */
     public function stripe(EntityManagerInterface $manager, CommandeRepository $commandeRepo, ProduitRepository $produitRepo, $reference): Response
     {
-        $YOUR_DOMAIN = 'https://www.atelierberthie.fr/';
+        $YOUR_DOMAIN = 'http://127.0.0.1:8000/';
 
         $liste_produit_stripe = [];
 
@@ -180,8 +180,8 @@ class CommandeController extends AbstractController
             $manager->flush();
 
             //Mailclient succes confirm
-            $content = "Bonjour".$commande->getUser()->getFirstname()."<br>
-            Succes de votre commande test ! 
+            $content = "Bonjour ".$commande->getUser()->getFirstname().",<br>
+            Votre commande test est un succès, la confirmation de votre paiement test via stripe est confirmé. 
             Merci pour votre participation à la beta du site !<br>L'Atelier Berthie";
             $mail = new Mail();
             $mail->send($this->getUser()->getEmail(), 

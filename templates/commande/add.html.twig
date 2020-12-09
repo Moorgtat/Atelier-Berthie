@@ -83,7 +83,7 @@
     var stripe = Stripe("pk_test_51HlWG3GucqTraIY3PlMgPWTFdeav6LcwWNWBPkq790lHtuZ98jjamG2gWCPAXUT1ismvcWhMaMK9Joq1ZF0yxP4s00Jsu4DndS");
     var checkoutButton = document.getElementById("checkout-button");
     checkoutButton.addEventListener("click", function () {
-        fetch("https://www.atelierberthie.fr/commande/create-session/{{ reference }}", {
+        fetch("http://127.0.0.1:8000/commande/create-session/{{ reference }}", {
             method: "POST",
         })
         .then(function (response) {
