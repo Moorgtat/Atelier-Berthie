@@ -3,7 +3,7 @@
 {% block title %}Se connecter{% endblock %}
 
 {% block body %}
-<div class="container mw600 text-center px-5 mt-5">
+<div class="container mw600 text-center px-5 mt-5 mb-5">
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

@@ -198,6 +198,10 @@ a, a:hover {
     margin-top: 20px;
     margin-bottom: 20px;
     }
+    .m768{
+        margin-right: 25px;
+        margin-left: 25px;
+    }
 }
 
 @media (max-width: 1300px) {
